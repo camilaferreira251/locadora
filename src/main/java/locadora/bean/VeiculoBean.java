@@ -6,8 +6,10 @@
 package locadora.bean;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import locadora.entity.Veiculo;
 import locadora.rn.VeiculoRN;
 
@@ -34,8 +36,15 @@ public class VeiculoBean {
     }
     
     public String salvar() {
-        veiculoRN.salvar(veiculo);
-        return "/restrito/veiculo/cadastrarVeiculo.xhtml";
+        if (veiculoRN.salvar(veiculo)) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return "/restrito/home.xhtml";
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return null;
+        }
     }
 
     public String excluir() {

@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,8 +41,8 @@ public class Aluguel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -58,9 +60,9 @@ public class Aluguel implements Serializable {
     @NotNull
     @Column(name = "valor")
     private BigDecimal valor;
-    @JoinColumn(name = "participante_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario", referencedColumnName = "login")
     @ManyToOne(optional = false)
-    private Participante participanteId;
+    private Usuario usuario;
     @JoinColumn(name = "veiculo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Veiculo veiculoId;
@@ -111,12 +113,12 @@ public class Aluguel implements Serializable {
         this.valor = valor;
     }
 
-    public Participante getParticipanteId() {
-        return participanteId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setParticipanteId(Participante participanteId) {
-        this.participanteId = participanteId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Veiculo getVeiculoId() {
@@ -149,7 +151,7 @@ public class Aluguel implements Serializable {
 
     @Override
     public String toString() {
-        return "locadora.entity.Aluguel[ id=" + id + " ]";
+        return "locadora.entity.Aluguel[ id=" + id + ",dataInicio: "+dataInicio+",dataFim: "+dataFim+",usuario: "+usuario+",valor: "+valor+" ]";
     }
     
 }

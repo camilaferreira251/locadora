@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template.xhtml">
+        <ui:define name="centro">
+            <h:form id="frmGeral">
+                <p:growl
+                sticky="false"
+                showDetail="true"/>
+
+                <h:inputHidden value="#{aluguelBean.aluguel.id}"/>
+                
+                <p:fieldset legend="Controle de Veículos" toggleable="true">
+                        <p:messages id="messages" />
+
+                        <h:panelGrid columns="2" id="pnDvds"
+                                style="font-family: Verdana, Arial; font-weight: bold;">
+                                <h:outputLabel id="lbVeiculo" value="*Placa:" for="veiculo"
+                                        style="float: right;" />
+                                <h:selectOneMenu 
+                                    id="veiculo" 
+                                    value="#{aluguelBean.veiculo}">
+                                    <f:selectItems value="#{aluguelBean.selectVeiculo}"/>
+                                    <f:converter converterId="VeiculoConversor"/>
+                                </h:selectOneMenu>
+
+                                <h:outputLabel id="lbDataInicio" value="*Data Inicio:" for="dataInicio"
+                                        style="float: right;" />
+                                <p:calendar id="dataInicio" value="#{aluguelBean.aluguel.dataInicio}" showOn="button" />
+                                
+                                <h:outputLabel id="lbDataFinal" value="*Data Final:" for="dataFinal"
+                                        style="float: right;" />
+                                <p:calendar id="dataFinal" value="#{aluguelBean.aluguel.dataFim}" showOn="button" />
+
+                        </h:panelGrid>
+
+                        <center>
+                                <h:panelGrid columns="3"
+                                        style="font-size: 12px; font-weight: bold;">
+                                    <p:commandButton value="Adicionar Veículo" action="#{aluguelBean.salvar()}"
+                                                update="frmGeral, messages, dtDVDs" />
+
+                                    <p:commandButton value="Alterar Veículo" action="#{aluguelBean.alterar()}"
+                                                update="frmGeral, messages, dtDVDs" />
+                                </h:panelGrid>
+                        </center>
+
+                        <p:spacer height="10" />
+
+                        <p:dataTable id="dtDVDs" emptyMessage="Nenhum registro encontrado."
+                                     value="#{aluguelBean.aluguels}" var="a"
+                                style="text-align: center; font-weight: bold;">
+                                <f:facet name="header">
+                                        <h:outputText value="Registro de alugueis" />
+                                </f:facet>
+
+                            <p:column id="tituloColumn" filterBy="#{a.veiculoId}"
+                                        headerText="Filtrar por marca" filterMatchMode="contains">
+                                        <f:facet name="header">
+                                                <h:outputText value="Veículo" />
+                                        </f:facet>
+                                <h:outputText value="#{a.veiculoId}" />
+                                </p:column>
+
+                                <p:column>
+                                        <f:facet name="header">
+                                                <h:outputText value="Data Inicio" />
+                                        </f:facet>
+                                    <h:outputText value="#{a.dataInicio}" />
+                                </p:column>
+
+                                <p:column>
+                                        <f:facet name="header">
+                                                <h:outputText value="Data Fim" />
+                                        </f:facet>
+                                    <h:outputText value="#{a.dataFim}" />
+                                </p:column>
+
+                                <p:column>
+                                        <f:facet name="header">
+                                                <h:outputText value="Valor" />
+                                        </f:facet>
+                                    <h:outputText value="#{a.valor}" />
+                                </p:column>
+
+                                <p:column
+                                        rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADMIN')}">
+                                        <f:facet name="header">
+                                                <h:outputText value="Remover" />
+                                        </f:facet>
+                                        <f:ajax event="click" render="@form"
+                                                listener="#{aluguelBean.excluir()}">
+                                                <h:commandLink value="Remover" />
+                                        </f:ajax>
+                                </p:column>
+
+                                <p:column
+                                        rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADMIN')}">
+                                        <f:facet name="header">
+                                                <h:outputText value="Alterar" />
+                                        </f:facet>
+                                        <h:commandLink value="Alterar">
+                                            <p:ajax event="click" listener="#{aluguelBean.alterar()}"
+                                                        update="@form" />
+                                        </h:commandLink>
+                                </p:column>
+
+                                <f:facet name="footer">
+                                        <h:outputText
+                                            value="Há um total de #{aluguelBean.aluguels.size()} veículo(s) cadastrado(s) no sistema." />
+                                </f:facet>
+                        </p:dataTable>
+                </p:fieldset>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>

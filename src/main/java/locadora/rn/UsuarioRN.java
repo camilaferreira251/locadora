@@ -6,6 +6,7 @@ package locadora.rn;
 
 import java.util.List;
 import locadora.dao.GenericDAO;
+import locadora.dao.UsuarioDAO;
 import locadora.entity.Papel;
 import locadora.entity.Usuario;
 
@@ -15,7 +16,7 @@ import locadora.entity.Usuario;
  */
 public class UsuarioRN {
 
-    private final GenericDAO<Usuario> dao = new GenericDAO<Usuario>();
+    private final UsuarioDAO dao = new UsuarioDAO();
 
     public UsuarioRN() {
     }
@@ -41,6 +42,10 @@ public class UsuarioRN {
 
     public Usuario obter(String id) {
         return dao.obter(Usuario.class, id);
+    }
+    
+    public Usuario obterPorLogin (String login) {
+        return dao.obterPorLogin(login);
     }
 
     public boolean papel(String papel, Usuario u) {

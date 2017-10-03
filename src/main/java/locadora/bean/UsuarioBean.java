@@ -31,13 +31,7 @@ public class UsuarioBean {
     private static final Logger LOG = Logger.getLogger(UsuarioBean.class.getName());
 
     private final String ADMIN = "ROLE_ADMIN";
-    private final String PESAGEM = "ROLE_PESAGEM";
-    private final String SECAGEM = "ROLE_SECAGEM";
-    private final String TRITURACAO = "ROLE_TRITURACAO";
-    private final String PELOTIZACAO = "ROLE_PELOTIZACAO";
-    private final String EMBALAGEM = "ROLE_EMBALAGEM";
-    private final String CARACTERIZACAO = "ROLE_CARACTERIZACAO";
-    private final String ENRIQUECIMENTO = "ROLE_ENRIQUECIMENTO";
+    private final String USER = "ROLE_USER";
     private Usuario usuario = new Usuario();
     private final UsuarioRN rn = new UsuarioRN();
     private List<Usuario> usuarios;
@@ -64,32 +58,8 @@ public class UsuarioBean {
         return rn.papel(ADMIN, getUsuario());
     }
 
-    public boolean isPesagem() {
-        return rn.papel(PESAGEM, getUsuario());
-    }
-
-    public boolean isSecagem() {
-        return rn.papel(SECAGEM, getUsuario());
-    }
-
-    public boolean isTrituracao() {
-        return rn.papel(TRITURACAO, getUsuario());
-    }
-
-    public boolean isCaracterizacao() {
-        return rn.papel(CARACTERIZACAO, getUsuario());
-    }
-
-    public boolean isPelotizacao() {
-        return rn.papel(PELOTIZACAO, getUsuario());
-    }
-
-    public boolean isEmbalagem() {
-        return rn.papel(EMBALAGEM, getUsuario());
-    }
-
-    public boolean isEnriquecimento() {
-        return rn.papel(ENRIQUECIMENTO, getUsuario());
+    public boolean isUser() {
+        return rn.papel(USER, getUsuario());
     }
 
     public Usuario getUsuario() {
@@ -102,6 +72,10 @@ public class UsuarioBean {
         }
         return usuario;
     }
+    
+    public Usuario getUsuarioByLogin(String login) {
+        return rn.obterPorLogin(login);
+    } 
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
@@ -119,7 +93,7 @@ public class UsuarioBean {
         novoUsuario.setPapelList(selecionados);
         rn.salvar(novoUsuario);
         rn.salvarPapeis(selecionados, novoUsuario);
-        return "/admin/usuario/lista-usuario.xhtml";
+        return "/restrito/home.xhtml";
     }
 
     public String alterar() {

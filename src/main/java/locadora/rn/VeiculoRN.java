@@ -38,7 +38,7 @@ public class VeiculoRN {
         return dao.obterTodos(Veiculo.class);
     }
 
-    public Veiculo obter(String id) {
+    public Veiculo obter(Integer id) {
         return dao.obter(Veiculo.class, id);
     }
 }

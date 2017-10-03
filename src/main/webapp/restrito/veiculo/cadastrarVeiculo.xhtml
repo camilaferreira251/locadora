@@ -31,6 +31,14 @@
                                         validatorMessage="Campo [Ano] possui erros. Verifique.">
                                         <!--<f:validateLongRange minimum="1900" maximum="2012" />-->
                                 </p:inputText>
+                                
+                                <h:outputLabel id="lbAno" value="*Ano" for="ano"
+                                        style="float: right;" />
+                                <p:inputText id="ano" size="20" value="#{veiculoBean.veiculo.ano}"
+                                        required="true" requiredMessage="Campo [Ano] é obrigat�rio."
+                                        validatorMessage="Campo [Ano] possui erros. Verifique.">
+                                        <!--<f:validateLongRange minimum="1900" maximum="2012" />-->
+                                </p:inputText>
 
                                 <h:outputLabel id="lbMarca" value="*Marca:" for="marca"
                                         style="float: right;" />

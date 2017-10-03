@@ -1,26 +1,65 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Novo cadastro</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:panelGrid columns="3">
-                <h:outputLabel for="email">Email:</h:outputLabel>
-                <h:inputText value="" id="email"></h:inputText>
-                <br>
-                </br>
+        <h:form 
+            id="fprincipal">
+            <p:messages/>
+            <h:inputHidden 
+                id="ihnovoUsuarioid"
+                value="#{usuarioBean.novoUsuario.login}" />
+            <p:panel 
+                id="pprincipal" 
+                header="Cadastro">
+                <h:panelGrid columns="2">
+                    <h:panelGrid
+                        id="pgprincipal"
+                        columns="2">
+                        <h:outputLabel 
+                            id="olnome"
+                            for="itnome"
+                            value="Nome: "/>
+                        <p:inputText
+                            id="itnome" 
+                            value="#{usuarioBean.novoUsuario.nome}"
+                            required="true"/>
+                        <h:outputLabel 
+                            id="ollogin"
+                            for="itlogin"
+                            value="Login: "/>
+                        <p:inputText
+                            id="itlogin" 
+                            value="#{usuarioBean.novoUsuario.login}"
+                            required="true"/>
+                        <h:outputLabel for="pwd1" value="Senha: *" />  
+                        <p:password id="pwd1" value="#{usuarioBean.novoUsuario.senha}" 
+                                    label="senha" required="true" feedback="true" />  
 
-                <h:outputLabel for="senha">Senha</h:outputLabel>
-                <h:inputSecret value="" id="senha"></h:inputSecret>
-                <br>
-                </br>
-                
-                <h:button value="OK"/>
+                    </h:panelGrid>
 
-            </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:selectManyCheckbox value="#{usuarioBean.selecionados}"  
+                                              layout="pageDirection">  
+                            <f:selectItems value="#{usuarioBean.papeis}" />
+                            <f:converter converterId="PapelConversor"/>
+                        </h:selectManyCheckbox>
+                    </h:panelGrid>
+
+                    <p:commandButton 
+                        id="cbsalvar" 
+                        ajax="false"
+                        value="Salvar" 
+                        action="#{usuarioBean.salvar}"/>
+                </h:panelGrid>
+
+            </p:panel> 
+
         </h:form>
     </h:body>
 </html>

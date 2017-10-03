@@ -55,8 +55,8 @@ public class Usuario implements Serializable {
     private String nome;
     @ManyToMany(mappedBy = "usuarioList")
     private List<Papel> papelList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userUsername")
-    private List<Participante> participanteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Aluguel> aluguelList;
 
     public Usuario() {
     }
@@ -105,12 +105,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Participante> getParticipanteList() {
-        return participanteList;
+    public List<Aluguel> getAluguelList() {
+        return aluguelList;
     }
 
-    public void setParticipanteList(List<Participante> participanteList) {
-        this.participanteList = participanteList;
+    public void setAluguelList(List<Aluguel> aluguelList) {
+        this.aluguelList = aluguelList;
     }
 
     @Override

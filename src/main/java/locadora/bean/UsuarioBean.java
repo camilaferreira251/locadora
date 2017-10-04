@@ -67,7 +67,7 @@ public class UsuarioBean {
             FacesContext f = FacesContext.getCurrentInstance();
             ExternalContext e = f.getExternalContext();
             LOG.log(Level.INFO, e.getRemoteUser());
-            usuario = rn.obter(e.getRemoteUser());
+            usuario = rn.obterPorLogin(e.getRemoteUser());
         } catch (Exception e) {
         }
         return usuario;

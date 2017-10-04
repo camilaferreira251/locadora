@@ -206,8 +206,11 @@ public class Veiculo implements Serializable {
     }
 
     @Override
+//    public String toString() {
+//        return "locadora.entity.Veiculo[ id=" + id + " ]";
+//    }
     public String toString() {
-        return "locadora.entity.Veiculo[ id=" + id + " ]";
+        return modelo;
     }
     
 }

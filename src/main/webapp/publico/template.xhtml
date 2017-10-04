@@ -22,21 +22,11 @@
  
                 <p:layoutUnit position="west" size="220">  
                     <ui:insert name="menu">
-                        <div class="nav">
-                            <ul>
-                                <h:form id="ftop">
-                                    <li>
-                                        <a onclick=
-                                           "document.location = '#{request.contextPath}/j_spring_security_logout'" 
-                                           title="Sair">
-                                            <h:graphicImage library="design" name="logout.png"/>
-                                        </a>
-                                    </li>
-
-
-                                </h:form>
-                            </ul>
-                        </div>
+                        <h:form id="ftop">
+                            <p:menu>
+                                <p:menuitem value="Logout" onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"  icon="ui-icon-power"/>
+                            </p:menu>
+                        </h:form>
                     </ui:insert>
                 </p:layoutUnit>  
                 <p:layoutUnit position="center">  

@@ -19,6 +19,8 @@ import locadora.rn.AluguelRN;
 import locadora.rn.VeiculoRN;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -65,18 +67,14 @@ public class AluguelBean {
     }
     
     public String salvar() {
-        aluguel.setId(1);
         aluguel.setValor(new BigDecimal(calcularValor()));
-        aluguel.setUsuario(usuarioBean.getUsuarioByLogin("jhon"));
+        aluguel.setUsuario(usuarioBean.getUsuario());
         aluguel.setVeiculoId(veiculo);
-        
-        System.out.println(aluguel.toString());
-        System.out.println(usuario.toString());
         
         if (aluguelRN.salvar(aluguel)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
-            return "/restrito/home.xhtml";
+            return "/restrito/aluguel/cadastrarAluguel.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);

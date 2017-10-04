@@ -8,7 +8,7 @@
  
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Meu Sistema</title>
+        <title>Locadora de veículos</title>
         <style type="text/css">
             body {background-color: #eeeeee; font-size: 12px}
         </style> 
@@ -17,26 +17,16 @@
         <div align="center">
             <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
                 <p:layoutUnit position="north" size="100">  
-                    <h:graphicImage url="/tema/imagens/topo.jpg" />
+                    <p style="font-size:20px">  Locadora de Veículos</p>
                 </p:layoutUnit>  
  
                 <p:layoutUnit position="west" size="220">  
                     <ui:insert name="menu">
-                        <div class="nav">
-                            <ul>
-                                <h:form id="ftop">
-                                    <li>
-                                        <a onclick=
-                                           "document.location = '#{request.contextPath}/j_spring_security_logout'" 
-                                           title="Sair">
-                                            <h:graphicImage library="design" name="logout.png"/>
-                                        </a>
-                                    </li>
-
-
-                                </h:form>
-                            </ul>
-                        </div>
+                        <h:form id="ftop">
+                            <p:menu>
+                                <p:menuitem value="Logout" onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"  icon="ui-icon-power"/>
+                            </p:menu>
+                        </h:form>
                     </ui:insert>
                 </p:layoutUnit>  
                 <p:layoutUnit position="center">  

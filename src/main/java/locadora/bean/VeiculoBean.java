@@ -20,7 +20,7 @@ import locadora.rn.VeiculoRN;
 @ManagedBean
 @RequestScoped
 public class VeiculoBean {
-    private final VeiculoRN veiculoRN = new VeiculoRN();;
+    private final VeiculoRN veiculoRN = new VeiculoRN();
     private Veiculo veiculo = new Veiculo();;
     private List<Veiculo> veiculos;
     
@@ -39,6 +39,8 @@ public class VeiculoBean {
         if (veiculoRN.salvar(veiculo)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
+            this.veiculos = null;
+            this.veiculo = new Veiculo();
             return "/restrito/veiculo/cadastrarVeiculo.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
@@ -47,14 +49,16 @@ public class VeiculoBean {
         }
     }
 
-    public String excluir() {
+    public String excluir(Veiculo veiculo) {
         veiculoRN.excluir(veiculo);
         veiculos = null;
-        return "/admin/formatoEmbalagem/lista-formatoembalagem.xhtml";
+        return "/restrito/veiculo/cadastrarVeiculo.xhtml?faces-redirect=true";
     }
 
-    public String alterar() {
-        return "/admin/formatoEmbalagem/formatoembalagem.xhtml";
+    public String alterar(Veiculo veiculo) {
+        this.setVeiculo(veiculo);
+        veiculos = null;
+        return "/restrito/veiculo/cadastrarVeiculo.xhtml?faces-redirect=true";
     }
 
     public String cancelar() {

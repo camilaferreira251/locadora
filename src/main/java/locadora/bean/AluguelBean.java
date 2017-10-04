@@ -69,6 +69,8 @@ public class AluguelBean {
         if (aluguelRN.salvar(aluguel)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
+            this.alugueis = null;
+            this.aluguel = new Aluguel();
             return "/restrito/aluguel/cadastrarAluguel.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
@@ -88,14 +90,16 @@ public class AluguelBean {
         return d.getDays();
     }
 
-    public String excluir() {
+    public String excluir(Aluguel aluguel) {
         aluguelRN.excluir(aluguel);
         alugueis = null;
-        return "/admin/formatoEmbalagem/lista-formatoembalagem.xhtml";
+        return "/restrito/aluguel/cadastrarAluguel.xhtml?faces-redirect=true";
     }
 
-    public String alterar() {
-        return "/admin/formatoEmbalagem/formatoembalagem.xhtml";
+    public String alterar(Aluguel aluguel) {
+        this.setAluguel(aluguel);
+        alugueis = null;
+        return "/restrito/aluguel/cadastrarAluguel.xhtml?faces-redirect=true";
     }
 
     public String cancelar() {

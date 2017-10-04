@@ -58,26 +58,36 @@
                                         <h:outputText value="Registro de Alugueis" />
                                 </f:facet>
 
-                            <p:column id="tituloColumn" filterBy="#{a.veiculoId}"
-                                        headerText="Filtrar por marca" filterMatchMode="contains">
+                                <p:column id="tituloColumn">
                                         <f:facet name="header">
                                                 <h:outputText value="Veículo" />
                                         </f:facet>
                                 <h:outputText value="#{a.veiculoId}" />
+                                </p:column>
+                            
+                                <p:column id="tituloUsuario">
+                                        <f:facet name="header">
+                                                <h:outputText value="Usuário" />
+                                        </f:facet>
+                                    <h:outputText value="#{a.usuario}" />
                                 </p:column>
 
                                 <p:column>
                                         <f:facet name="header">
                                                 <h:outputText value="Data Inicio" />
                                         </f:facet>
-                                    <h:outputText value="#{a.dataInicio}" />
+                                    <h:outputText value="#{a.dataInicio}">
+                                          <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
                                 </p:column>
 
                                 <p:column>
                                         <f:facet name="header">
                                                 <h:outputText value="Data Fim" />
                                         </f:facet>
-                                    <h:outputText value="#{a.dataFim}" />
+                                    <h:outputText value="#{a.dataFim}">
+                                          <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
                                 </p:column>
 
                                 <p:column>

@@ -134,8 +134,11 @@ public class Usuario implements Serializable {
     }
 
     @Override
+//    public String toString() {
+//        return "locadora.entity.Usuario[ login=" + login + " ]";
+//    }
     public String toString() {
-        return "locadora.entity.Usuario[ login=" + login + " ]";
+        return nome;
     }
     
 }

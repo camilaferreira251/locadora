@@ -13,14 +13,11 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import locadora.entity.Aluguel;
-import locadora.entity.Usuario;
 import locadora.entity.Veiculo;
 import locadora.rn.AluguelRN;
 import locadora.rn.VeiculoRN;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -34,11 +31,9 @@ public class AluguelBean {
     private final UsuarioBean usuarioBean = new UsuarioBean();
     private Aluguel aluguel = new Aluguel();
     private Veiculo veiculo = new Veiculo();
-    Usuario usuario = new Usuario();
     private List<Aluguel> alugueis;
     
     public AluguelBean() {
-        usuario = usuarioBean.getUsuario();
     }
 
     public Aluguel getAluguel() {

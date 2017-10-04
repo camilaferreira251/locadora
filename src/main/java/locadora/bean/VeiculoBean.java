@@ -39,7 +39,7 @@ public class VeiculoBean {
         if (veiculoRN.salvar(veiculo)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
-            return "/restrito/home.xhtml";
+            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);

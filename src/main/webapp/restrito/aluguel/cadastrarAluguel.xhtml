@@ -14,12 +14,12 @@
 
                 <h:inputHidden value="#{aluguelBean.aluguel.id}"/>
                 
-                <p:fieldset legend="Controle de Veículos" toggleable="true">
+                <p:fieldset legend="Controle de Alugueis" toggleable="true">
                         <p:messages id="messages" />
 
                         <h:panelGrid columns="2" id="pnDvds"
                                 style="font-family: Verdana, Arial; font-weight: bold;">
-                                <h:outputLabel id="lbVeiculo" value="*Placa:" for="veiculo"
+                                <h:outputLabel id="lbVeiculo" value="*Veiculo:" for="veiculo"
                                         style="float: right;" />
                                 <h:selectOneMenu 
                                     id="veiculo" 
@@ -41,10 +41,10 @@
                         <center>
                                 <h:panelGrid columns="3"
                                         style="font-size: 12px; font-weight: bold;">
-                                    <p:commandButton value="Adicionar Veículo" action="#{aluguelBean.salvar()}"
+                                    <p:commandButton value="Adicionar Aluguel" action="#{aluguelBean.salvar()}"
                                                 update="frmGeral, messages, dtDVDs" />
 
-                                    <p:commandButton value="Alterar Veículo" action="#{aluguelBean.alterar()}"
+                                    <p:commandButton value="Alterar Aluguel" action="#{aluguelBean.alterar()}"
                                                 update="frmGeral, messages, dtDVDs" />
                                 </h:panelGrid>
                         </center>
@@ -55,7 +55,7 @@
                                      value="#{aluguelBean.aluguels}" var="a"
                                 style="text-align: center; font-weight: bold;">
                                 <f:facet name="header">
-                                        <h:outputText value="Registro de alugueis" />
+                                        <h:outputText value="Registro de Alugueis" />
                                 </f:facet>
 
                             <p:column id="tituloColumn" filterBy="#{a.veiculoId}"
@@ -111,7 +111,7 @@
 
                                 <f:facet name="footer">
                                         <h:outputText
-                                            value="Há um total de #{aluguelBean.aluguels.size()} veículo(s) cadastrado(s) no sistema." />
+                                            value="Há um total de #{aluguelBean.aluguels.size()} aluguel(is) cadastrado(s) no sistema." />
                                 </f:facet>
                         </p:dataTable>
                 </p:fieldset>

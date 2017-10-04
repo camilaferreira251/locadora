@@ -76,7 +76,7 @@ public class AluguelBean {
         if (aluguelRN.salvar(aluguel)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
-            return "/restrito/home.xhtml";
+            return "/restrito/aluguel/cadastrarAluguel.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);

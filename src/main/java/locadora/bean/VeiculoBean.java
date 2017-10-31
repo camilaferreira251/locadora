@@ -21,7 +21,7 @@ import locadora.rn.VeiculoRN;
 @RequestScoped
 public class VeiculoBean {
     private final VeiculoRN veiculoRN = new VeiculoRN();
-    private Veiculo veiculo = new Veiculo();;
+    private Veiculo veiculo = new Veiculo();
     private List<Veiculo> veiculos;
     
     public VeiculoBean() {

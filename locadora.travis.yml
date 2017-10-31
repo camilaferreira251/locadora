@@ -1,0 +1,9 @@
+language: java
+os: osx
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 73cb291d6600891d6df77c17c0c2a135c16a6396
+  on:
+  branch: master

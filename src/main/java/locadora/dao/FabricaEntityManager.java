@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
  */
 public class FabricaEntityManager {
 
-    private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("com.locadora_locadora1_war_1.0-SNAPSHOTPU");
+    private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("locadora_war_1.0-SNAPSHOTPU");
 
     private FabricaEntityManager() {
     }

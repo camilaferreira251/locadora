@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import java.util.List;
+import locadora.entity.Aluguel;
+import locadora.entity.Papel;
 import locadora.entity.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -42,7 +45,8 @@ public class UsuarioTest {
      String login = "camila";
      String senha = "12345";
      String nome = "camila";
-     
+     List<Papel> papelList;
+     List<Aluguel> aluguelList;
       
      @Test
      public void TestUsuario() {
@@ -52,9 +56,44 @@ public class UsuarioTest {
     assertEquals("camila", usuario.getLogin());
     assertEquals("12345", usuario.getSenha());
     assertEquals("camila", usuario.getNome());
+    
+    usuario.setLogin(login);
+    usuario.setNome(nome);
+    usuario.setSenha(senha);
      }
+     
+     @Test
+     public void UsuarioIdTest(){
+     Usuario u = new Usuario(login);
+     u.getLogin();
+     }     
 
-
+     @Test
+     public void UsuarioPapelListTest(){
+     Usuario u = new Usuario();
+     u.getPapelList();
+     u.setPapelList(papelList);
+     }
+     
+     @Test
+     public void UsuarioAluguelListTest(){
+     Usuario u = new Usuario();
+     u.getAluguelList();
+     u.setAluguelList(aluguelList);
+     }
+     
+     @Test
+    public void UsuarioHashTest(){
+        Usuario u = new Usuario();
+        u.hashCode();
+    }
+    
+    @Test
+    public void UsuarioToString(){
+        Usuario u = new Usuario();
+        u.toString();
+    }
+     
     }
 
      

@@ -6,15 +6,16 @@
 package locadora.rn;
 
 import java.util.List;
-import locadora.dao.GenericDAO;
+import locadora.dao.AluguelDAO;
 import locadora.entity.Aluguel;
+import locadora.entity.Usuario;
 
 /**
  *
  * @author jhonatan
  */
 public class AluguelRN {
-    private final GenericDAO<Aluguel> dao = new GenericDAO<Aluguel>();
+    private final AluguelDAO dao = new AluguelDAO();
 
     public AluguelRN() {
     }
@@ -36,6 +37,10 @@ public class AluguelRN {
 
     public List<Aluguel> obterTodos() {
         return dao.obterTodos(Aluguel.class);
+    }
+    
+    public List<Aluguel> obterTodosPorLogin(Usuario user) {
+        return dao.obterTodosByUser(user.getLogin());
     }
 
     public Aluguel obter(String id) {

@@ -5,6 +5,7 @@
  */
 
 import java.util.List;
+import junit.framework.Assert;
 import locadora.entity.Papel;
 import locadora.entity.Usuario;
 import org.junit.After;
@@ -57,6 +58,7 @@ public class PapelTest {
         p.toString();
     }
     
+   
     
     @BeforeClass
     public static void setUpClass() {

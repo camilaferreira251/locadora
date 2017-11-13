@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-import java.util.List;
-import locadora.entity.Veiculo;
-import locadora.rn.VeiculoRN;
+import locadora.entity.Papel;
+import locadora.rn.PapelRN;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -19,18 +18,16 @@ import static org.junit.Assert.*;
  *
  * @author camila
  */
-public class VeiculoRNTest {
+public class PapelRNTest {
     
-    Veiculo veiculo;
-     
     @Test
-    public void VeiculoRNTest() {
-        VeiculoRN v = new VeiculoRN();
-        Veiculo vei = new Veiculo();
-        
-        Assert.assertTrue(v.salvar(vei));
-        Assert.assertTrue(v.excluir(vei));
-                
+    public void  PapelRNTest() {
+    PapelRN pr = new PapelRN();
+    Papel p = new Papel();
+       
+    Assert.assertTrue(pr.salvar(p)); 
+    Assert.assertTrue(pr.excluir(p));
+    
     }
     
     @BeforeClass

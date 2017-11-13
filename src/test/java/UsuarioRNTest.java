@@ -5,8 +5,9 @@
  */
 
 import java.util.List;
-import locadora.entity.Veiculo;
-import locadora.rn.VeiculoRN;
+import locadora.entity.Papel;
+import locadora.entity.Usuario;
+import locadora.rn.UsuarioRN;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -19,18 +20,17 @@ import static org.junit.Assert.*;
  *
  * @author camila
  */
-public class VeiculoRNTest {
+public class UsuarioRNTest {
     
-    Veiculo veiculo;
-     
     @Test
-    public void VeiculoRNTest() {
-        VeiculoRN v = new VeiculoRN();
-        Veiculo vei = new Veiculo();
-        
-        Assert.assertTrue(v.salvar(vei));
-        Assert.assertTrue(v.excluir(vei));
-                
+    public void UsuarioRNTest() {
+    UsuarioRN u = new UsuarioRN();
+    Usuario us = new Usuario();
+       
+    Assert.assertTrue(u.salvar(us)); 
+    Assert.assertFalse(u.excluir(us));
+    
+ 
     }
     
     @BeforeClass

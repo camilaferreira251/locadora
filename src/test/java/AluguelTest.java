@@ -64,13 +64,24 @@ public class AluguelTest {
         Aluguel a = new Aluguel();
         a.hashCode();
     }
-    
+    Aluguel a = new Aluguel();
     @Test
     public void AluguelToString(){
-        Aluguel a = new Aluguel();
-        a.toString();
+       a.toString();
     }
     
+    @Test
+    public void AluguelEqualsTest(){
+    assertTrue(a.equals(a));
+    }
+    
+    Usuario u = new Usuario();
+    @Test
+    public void AluguelEqualsFalse(){
+    assertFalse(a.equals(u));
+    } 
+    
+      
     @BeforeClass
     public static void setUpClass() {
     }

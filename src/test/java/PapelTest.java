@@ -51,13 +51,22 @@ public class PapelTest {
         Papel p = new Papel();
         p.hashCode();
     }
-    
+    Papel p = new Papel();
     @Test
     public void PapelToString(){
-        Papel p = new Papel();
         p.toString();
     }
     
+    @Test
+    public void PapelEqualsTest(){
+    assertTrue(p.equals(p));
+    }
+    
+    Usuario u = new Usuario();
+    @Test
+    public void PapelEqualsFalseTest(){
+    assertFalse(p.equals(u));
+    }
    
     
     @BeforeClass

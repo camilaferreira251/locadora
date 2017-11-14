@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -84,6 +85,9 @@ public class Veiculo implements Serializable {
     @NotNull
     @Column(name = "valorDiaria")
     private BigDecimal valorDiaria;
+    @Lob
+    @Column(name = "imagem")
+    private byte[] imagem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculoId")
     private List<Aluguel> aluguelList;
 
@@ -176,6 +180,14 @@ public class Veiculo implements Serializable {
         this.valorDiaria = valorDiaria;
     }
 
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
     @XmlTransient
     public List<Aluguel> getAluguelList() {
         return aluguelList;
@@ -206,11 +218,8 @@ public class Veiculo implements Serializable {
     }
 
     @Override
-//    public String toString() {
-//        return "locadora.entity.Veiculo[ id=" + id + " ]";
-//    }
     public String toString() {
-        return modelo;
+        return "locadora.entity.Veiculo[ id=" + id + " ]";
     }
     
 }

@@ -11,8 +11,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,13 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Aluguel.findById", query = "SELECT a FROM Aluguel a WHERE a.id = :id")
     , @NamedQuery(name = "Aluguel.findByDataInicio", query = "SELECT a FROM Aluguel a WHERE a.dataInicio = :dataInicio")
     , @NamedQuery(name = "Aluguel.findByDataFim", query = "SELECT a FROM Aluguel a WHERE a.dataFim = :dataFim")
-    , @NamedQuery(name = "Aluguel.findByValor", query = "SELECT a FROM Aluguel a WHERE a.valor = :valor")})
+    , @NamedQuery(name = "Aluguel.findByValor", query = "SELECT a FROM Aluguel a WHERE a.valor = :valor")
+    , @NamedQuery(name = "Aluguel.findByUser", query = "SELECT a FROM Aluguel a WHERE a.usuario = :usuario")})
 public class Aluguel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -151,7 +150,7 @@ public class Aluguel implements Serializable {
 
     @Override
     public String toString() {
-        return "locadora.entity.Aluguel[ id=" + id + ",dataInicio: "+dataInicio+",dataFim: "+dataFim+",usuario: "+usuario+",valor: "+valor+" ]";
+        return "locadora.entity.Aluguel[ id=" + id + " ]";
     }
     
 }

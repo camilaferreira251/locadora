@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template.xhtml">
+        <ui:define name="centro">
+            <p:fieldset legend="Controle de Veículos" toggleable="true">
+                <p:messages id="messages" />
+
+                <p:panelGrid style="margin-top:20px" columns="2">
+                    <f:facet name="header">
+                        Veículo selecionado
+                    </f:facet>
+                    
+                    
+                    <h:outputText value="Marca:" style="font-weight: bold"/>
+                    <h:outputText value="#{aluguelBean.veiculo.marca}" />
+
+                    <h:outputText value="Modelo:" style="font-weight: bold"/>
+                    <h:outputText value="#{aluguelBean.veiculo.modelo}" />
+
+                    <h:outputText value="Ano:" style="font-weight: bold"/>
+                    <h:outputText value="#{aluguelBean.veiculo.ano}" />
+
+                    <h:outputText value="Cor:" style="font-weight: bold"/>
+                    <h:outputText value="#{aluguelBean.veiculo.cor}" style="color:#{veiculo.cor}"/>
+
+                    <h:outputText value="Valor diária:" style="font-weight: bold"/>
+                    <h:outputText value="R$ #{aluguelBean.veiculo.valorDiaria}" />
+                </p:panelGrid>
+
+                <h:form id="frmAluguelCliente2">
+                    <h:panelGrid columns="2" id="pnDvds"
+                                 style="font-family: Verdana, Arial; font-weight: bold;">
+
+                        <h:outputLabel id="lbDataInicio" value="*Data Inicio:" for="dataInicio"
+                                       style="float: right;" />
+                        <p:calendar id="dataInicio" value="#{aluguelBean.aluguel.dataInicio}"
+                                    showOn="button">
+                            <p:ajax update="@form"/>
+                        </p:calendar>
+
+                        <h:outputLabel id="lbDataFinal" value="*Data Final:" for="dataFinal"
+                                       style="float: right;" />
+                        <p:calendar id="dataFinal" value="#{aluguelBean.aluguel.dataFim}" showOn="button">
+                            <p:ajax update="@form"/>
+                        </p:calendar>
+
+                        <h:outputText value="Valor final: " style="font-weight: bold"/>
+                        <h:outputText id="valorFinal"
+                                                   rendered="#{aluguelBean.aluguel.dataInicio != null
+                                                               and aluguelBean.aluguel.dataFim != null}"
+                                                   value="R$ #{aluguelBean.calcularValor}"/>
+                        <p:commandButton value="Voltar">
+                            
+                        </p:commandButton>
+                        <p:commandButton value="Concluir">
+                            
+                        </p:commandButton>
+                    </h:panelGrid>
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+    </ui:decorate>
+</html>

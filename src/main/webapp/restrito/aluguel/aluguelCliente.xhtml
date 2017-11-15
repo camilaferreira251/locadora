@@ -24,8 +24,10 @@
                                  styleClass="ui-panelgrid-blank">
 
                         <f:facet name="header">
-                            <p:graphicImage value="#{veiculoBean.imageStreamed}">
-                                <f:param name="id" value="#{veiculo.id}" />
+                            <p:graphicImage value="#{veiculoBean.imagemVeiculo}"
+                                            width="170px"
+                                            height="115px">
+                                <f:param name="veiculoParam" value="#{veiculo.id}"/>
                             </p:graphicImage>
                         </f:facet>
 

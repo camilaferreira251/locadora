@@ -14,8 +14,13 @@
                     <f:facet name="header">
                         Veículo selecionado
                     </f:facet>
-                    
-                    
+
+                    <p:graphicImage value="#{veiculoBean.imagemVeiculo}"
+                                    width="170px"
+                                    height="115px">
+                        <f:param name="veiculoParam" value="#{aluguelBean.veiculo.id}"/>
+                    </p:graphicImage>
+
                     <h:outputText value="Marca:" style="font-weight: bold"/>
                     <h:outputText value="#{aluguelBean.veiculo.marca}" />
 
@@ -51,14 +56,14 @@
 
                         <h:outputText value="Valor final: " style="font-weight: bold"/>
                         <h:outputText id="valorFinal"
-                                                   rendered="#{aluguelBean.aluguel.dataInicio != null
-                                                               and aluguelBean.aluguel.dataFim != null}"
-                                                   value="R$ #{aluguelBean.calcularValor}"/>
+                                      rendered="#{aluguelBean.aluguel.dataInicio != null
+                                                  and aluguelBean.aluguel.dataFim != null}"
+                                      value="R$ #{aluguelBean.calcularValor}"/>
                         <p:commandButton value="Voltar">
-                            
+
                         </p:commandButton>
                         <p:commandButton value="Concluir">
-                            
+
                         </p:commandButton>
                     </h:panelGrid>
                 </h:form>

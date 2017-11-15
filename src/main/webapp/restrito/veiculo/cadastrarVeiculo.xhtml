@@ -8,11 +8,7 @@
     <ui:decorate template="/publico/template.xhtml">
         <ui:define name="centro">
             <h:form id="frmGeral" enctype="multipart/form-data">
-            <!--<h:form id="frmGeral">-->
-                <p:growl
-                    sticky="false"
-                    showDetail="true"/>
-
+                <!--<h:form id="frmGeral">-->
                 <h:inputHidden value="#{veiculoBean.veiculo.id}"/>
 
                 <p:fieldset legend="Controle de Veículos" toggleable="true">
@@ -64,34 +60,14 @@
                                      validatorMessage="Campo [Preço] possui erros. Verifique.">
                             <!--<f:validateDoubleRange minimum="1" />-->
                         </p:inputText>
-
-                        <h:outputLabel value="Selecione uma imagem" for="arquivo" />
-
-                        <p:fileUpload value="#{veiculoBean.arquivo}" mode="simple"
-                                      update="growl" label="Arquivo"
-                                      validator="#{veiculoBean.validarImagem}"/>
-
-                        <p:commandButton value="Importar"
-                                         actionListener="#{veiculoBean.uploadImagemVeiculo}">
-                            <f:ajax execute="@all" render="@form"/>
-                        </p:commandButton>
-                        
-                        <!--<p:outputPanel layout="block" id="personPicture">-->
-                    <p:graphicImage height="150"
-                                    value="#{veiculoBean.uploadedFileAsStream}"
-                                    rendered="#{veiculoBean.uploadedFileAsStream != null}" />
-                    <h:outputText rendered="#{veiculoBean.arquivo != null}"
-                                  value="#{veiculoBean.arquivo.contents}"></h:outputText>
-                <!--</p:outputPanel>-->
-
                     </h:panelGrid>
 
                     <center>
                         <h:panelGrid columns="3"
                                      style="font-size: 12px; font-weight: bold;">
-                            <p:commandButton value="Salvar Veículo" action="#{veiculoBean.salvar()}"
+                            <p:commandButton value="Avançar" action="#{veiculoBean.salvar()}"
                                              update="frmGeral, messages, dtDVDs">
-                                <f:ajax execute="@all" render="@form"/>
+                                <!--<f:ajax execute="@all" render="@form"/>-->
                             </p:commandButton>
                         </h:panelGrid>
                     </center>

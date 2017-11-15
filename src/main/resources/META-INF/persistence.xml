@@ -6,6 +6,7 @@
     <class>locadora.entity.Veiculo</class>
     <class>locadora.entity.Aluguel</class>
     <class>locadora.entity.Papel</class>
+    <class>locadora.entity.Imagem</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/locadora?zeroDateTimeBehavior=convertToNull"/>

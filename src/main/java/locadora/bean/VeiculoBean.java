@@ -6,22 +6,17 @@
 package locadora.bean;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.faces.validator.ValidatorException;
 import locadora.entity.Veiculo;
 import locadora.rn.VeiculoRN;
-import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -37,9 +32,9 @@ public class VeiculoBean {
     private final VeiculoRN veiculoRN = new VeiculoRN();
     private Veiculo veiculo = new Veiculo();
     private List<Veiculo> veiculos;
-    private static final int MAX_SIZE = 2 * 1024 * 1024;
     private UploadedFile arquivo;
-
+    private static final int MAX_SIZE = 2 * 1024 * 1024;
+    private StreamedContent sc;
 
     public VeiculoBean() {
     }
@@ -60,7 +55,23 @@ public class VeiculoBean {
         this.arquivo = arquivo;
     }
 
-    public void validarImagem(FacesContext context, UIComponent component, Object value) {
+    public String nextStep() {
+        return "/restrito/aluguel/confirmarAluguel.xhtml";
+    }
+
+    public StreamedContent getImagemVeiculo() {
+        String vId = FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap().get("veiculoParam");
+        if (vId != null) {
+            Veiculo v = veiculoRN.obter(Integer.parseInt(vId));
+            ByteArrayInputStream img
+                    = new ByteArrayInputStream(v.getImagem());
+            return new DefaultStreamedContent(img);
+        }
+        return new DefaultStreamedContent();
+    }
+
+    public void validarImagem(FacesContext context, UIComponent component, Object value) throws IOException {
         arquivo = (UploadedFile) value;
         if (arquivo.getSize() > MAX_SIZE) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -75,40 +86,21 @@ public class VeiculoBean {
         }
     }
 
-    public void uploadImagemVeiculo() {
-            veiculo.setImagem(arquivo.getContents());
-    }
-    
-    public String nextStep() {
-        return "/restrito/aluguel/confirmarAluguel.xhtml";
-    }
+    public String handleFileUpload(FileUploadEvent e) {
+        veiculo = (Veiculo) FacesContext.
+                        getCurrentInstance().getExternalContext().
+                        getSessionMap().get("veiculo");
 
-    public StreamedContent getUploadedFileAsStream() {
-        if (arquivo != null) {
-            try {
-                return new DefaultStreamedContent(arquivo.getInputstream());
-            } catch (IOException ex) {
-                Logger.getLogger(VeiculoBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return null;
-    }
-    
-    public StreamedContent getImageStreamed(){
-        FacesContext context = FacesContext.getCurrentInstance();
-        
-        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            return new DefaultStreamedContent();
-        }
-        else {
-            String id = context.getExternalContext().getRequestParameterMap().get("id");
-            byte[] image = null;
-            for (Veiculo v : veiculos) {
-                if (v.getId().toString() == id) {
-                    image = v.getImagem();
-                }
-            }
-            return new DefaultStreamedContent(new ByteArrayInputStream(image));
+        veiculo.setImagem(e.getFile().getContents());
+
+        if (veiculoRN.salvar(veiculo)) {
+            FacesMessage message = new FacesMessage("Importado com sucesso.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao importar", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return null;
         }
     }
 
@@ -117,8 +109,10 @@ public class VeiculoBean {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             this.veiculos = null;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("veiculo", this.veiculo);
             this.veiculo = new Veiculo();
-            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
+//            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
+            return "/restrito/veiculo/imagemVeiculo.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);

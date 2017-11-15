@@ -5,15 +5,12 @@
  */
 package locadora.bean;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.faces.model.SelectItem;
 import locadora.entity.Aluguel;
 import locadora.entity.Veiculo;
@@ -21,8 +18,6 @@ import locadora.rn.AluguelRN;
 import locadora.rn.VeiculoRN;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -94,11 +89,6 @@ public class AluguelBean {
         DateTime dataFinal = new DateTime(aluguel.getDataFim().getTime());
         Days d = Days.daysBetween(dataInicio, dataFinal);
         return d.getDays();
-    }
-
-    public StreamedContent getImageStreamed() throws IOException {
-        byte[] image = aluguel.getVeiculoId().getImagem();
-        return new DefaultStreamedContent(new ByteArrayInputStream(image));
     }
 
     public String excluir(Aluguel aluguel) {

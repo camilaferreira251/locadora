@@ -6,7 +6,7 @@
 package locadora.dao;
 
 import java.util.List;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import locadora.entity.Aluguel;
 
 /**
@@ -16,7 +16,8 @@ import locadora.entity.Aluguel;
 public class AluguelDAO extends GenericDAO<Aluguel>{
     
     public List<Aluguel> obterTodosByUser(String login) {
-        TypedQuery<Aluguel> query = getEntityManager().createNamedQuery("Aluguel.findByUser", Aluguel.class)
+        String squery = "SELECT a FROM Aluguel a WHERE a.usuario = :usuario";
+        Query query = getEntityManager().createNativeQuery(squery, Aluguel.class)
                 .setParameter("usuario", login);
         return query.getResultList();
     }

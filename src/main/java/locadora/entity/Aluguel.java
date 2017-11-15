@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Aluguel.findById", query = "SELECT a FROM Aluguel a WHERE a.id = :id")
     , @NamedQuery(name = "Aluguel.findByDataInicio", query = "SELECT a FROM Aluguel a WHERE a.dataInicio = :dataInicio")
     , @NamedQuery(name = "Aluguel.findByDataFim", query = "SELECT a FROM Aluguel a WHERE a.dataFim = :dataFim")
-    , @NamedQuery(name = "Aluguel.findByValor", query = "SELECT a FROM Aluguel a WHERE a.valor = :valor")
-    , @NamedQuery(name = "Aluguel.findByUser", query = "SELECT a FROM Aluguel a WHERE a.usuario = :usuario")})
+    , @NamedQuery(name = "Aluguel.findByValor", query = "SELECT a FROM Aluguel a WHERE a.valor = :valor")})
 public class Aluguel implements Serializable {
 
     private static final long serialVersionUID = 1L;

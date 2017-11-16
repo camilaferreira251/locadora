@@ -4,8 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
- 
+      xmlns:b="http://bootsfaces.net/ui">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Locadora de veículos</title>
@@ -16,24 +16,32 @@
     <h:body>
         <div align="center">
             <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
-                <p:layoutUnit position="north" size="100">  
-                    <p style="font-size:20px">  Locadora de Veículos</p>
-                </p:layoutUnit>  
- 
+                
+
                 <p:layoutUnit position="west" size="220">  
                     <ui:insert name="menu">
                         <h:form id="ftop" rendered="${usuarioBean.user or usuarioBean.administrador}">
-                            <p:menu>
-                                <p:menuitem value="Logout" onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"
-                                            icon="ui-icon-power"/>
-                                <p:menuitem value="Cadastrar veículo"
-                                            url="/restrito/veiculo/cadastrarVeiculo.xhtml"
-                                            icon="ui-icon-wrench"
-                                            rendered="${usuarioBean.administrador}"/>
-                                <p:menuitem value="Cadastrar aluguel"
-                                            url="/restrito/aluguel/cadastrarAluguel.xhtml"
-                                            icon="ui-icon-cart"/>
-                            </p:menu>
+                            <b:navBar brand="Locadora" inverse="true" fixed="top">
+                                <b:navbarLinks>
+                                    <b:dropMenu value="Veículos"
+                                                rendered="${usuarioBean.administrador}">
+                                        <b:navLink value="Cadastrar"
+                                                   href="/locadora/restrito/veiculo/cadastrarVeiculo.xhtml"></b:navLink>
+                                        <b:navLink value="Veículos cadastrados" href="#"></b:navLink>
+                                    </b:dropMenu>
+                                    <b:dropMenu value="Alugueis">
+                                        <b:navLink value="Realizar novo"
+                                                   href="restrito/aluguel/cadastrarAluguel.xhtml"></b:navLink>
+                                        <b:navLink value="Listagem de alugueis" href="#"></b:navLink>
+                                    </b:dropMenu>
+                                </b:navbarLinks>
+                                <b:navbarLinks pull="right">
+                                    <b:navLink value="Sair"
+                                               onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"
+                                               icon="glyphicon glyphicon-log-out">
+                                    </b:navLink>
+                                </b:navbarLinks>
+                            </b:navBar>
                         </h:form>
                     </ui:insert>
                 </p:layoutUnit>  

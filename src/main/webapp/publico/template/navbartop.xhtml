@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:remove>
+        <!--
+                    Hint to editors: The menus follow the Chicago style of capitalization. Please capitalize everything but the "smaller" words. 
+        -->
+    </ui:remove>
+    <b:navBar brand="Locadora"
+              brandHref="#" inverse="true"
+              fixed="top">
+        <b:container>
+            <h:form id="ftop" rendered="${usuarioBean.user or usuarioBean.administrador}">
+                <b:navBar brand="Locadora" inverse="true" fixed="top">
+                    <b:navbarLinks>
+                        <b:dropMenu value="Veículos"
+                                    rendered="${usuarioBean.administrador}">
+                            <b:navLink value="Cadastrar"
+                                       href="/locadora/restrito/veiculo/formVeiculo.xhtml"></b:navLink>
+                            <b:navLink value="Veículos cadastrados"
+                                       href="/locadora/restrito/veiculo/listarVeiculos.xhtml"></b:navLink>
+                        </b:dropMenu>
+                        <b:dropMenu value="Alugueis">
+                            <b:navLink value="Realizar novo"
+                                       href="/locadora/restrito/aluguel/visualizarVeiculos.xhtml"></b:navLink>
+                            <b:navLink value="Listagem de alugueis"
+                                       href="/locadora/restrito/aluguel/listarAlugueis.xhtml"></b:navLink>
+                        </b:dropMenu>
+                    </b:navbarLinks>
+                    <b:navbarLinks pull="right">
+                        <b:navLink value="Sair"
+                                   onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"
+                                   icon="glyphicon glyphicon-log-out">
+                        </b:navLink>
+                    </b:navbarLinks>
+                </b:navBar>
+            </h:form>
+        </b:container>
+    </b:navBar>
+
+</ui:fragment>

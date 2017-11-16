@@ -55,10 +55,7 @@
                         </p:calendar>
 
                         <h:outputText value="Valor final: " style="font-weight: bold"/>
-                        <h:outputText id="valorFinal"
-                                      rendered="#{aluguelBean.aluguel.dataInicio != null
-                                                  and aluguelBean.aluguel.dataFim != null}"
-                                      value="R$ #{aluguelBean.calcularValor}"/>
+                        
                         <p:commandButton value="Voltar">
 
                         </p:commandButton>

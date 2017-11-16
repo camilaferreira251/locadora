@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:form id="formAluguel" inline="true">
+                <b:panel title="Dados do veículo" titleStyle="text-align: center" look="success">
+                    <f:param name="veiculoId" value="#{aluguelBean.veiculo.id}"/>
+                    
+                    <center>
+                        <p:graphicImage value="#{veiculoBean.imagemVeiculo}"
+                                        width="200px"
+                                        height="120px">
+                            <f:param name="veiculoParam" value="#{aluguelBean.aluguel.veiculoId.id}"/>
+                        </p:graphicImage>
+
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <h:outputText value="Placa: " />
+                            <h:outputText value="#{aluguelBean.aluguel.veiculoId.placa}"/>
+                            <h:outputText value="Modelo: " />
+                            <h:outputText value="#{aluguelBean.aluguel.veiculoId.modelo}"/>
+                            <h:outputText value="Marca: " />
+                            <h:outputText value="#{aluguelBean.aluguel.veiculoId.marca}"/>
+                            <h:outputText value="Cor: " />
+                            <h:outputText value="#{aluguelBean.aluguel.veiculoId.cor}"/>
+                            <h:outputText value="Ano " />
+                            <h:outputText value="#{aluguelBean.aluguel.veiculoId.cor}"/>
+                            <h:outputText value="Possui ar Condicionado? " />
+                            <c:if test="#{aluguelBean.aluguel.veiculoId.arCondicionado}">
+                                <h:outputText value="Sim"/>
+                            </c:if>
+                            <c:if test="#{!aluguelBean.aluguel.veiculoId.arCondicionado}">
+                                <h:outputText value="Não"/>
+                            </c:if>
+
+                            <h:outputText value="Possui trava elétrica?" />
+                            <c:if test="#{aluguelBean.aluguel.veiculoId.travaEletrica}">
+                                <h:outputText value="Sim"/>
+                            </c:if>
+                            <c:if test="#{!aluguelBean.aluguel.veiculoId.travaEletrica}">
+                                <h:outputText value="Não"/>
+                            </c:if>
+                            <h:outputText value="Valor da diária:" />
+                            <h:outputText value="R$ #{aluguelBean.aluguel.veiculoId.valorDiaria}"/>
+                        </h:panelGrid>
+                    </center>
+                </b:panel>
+                <b:panel title="Dados do aluguel" look="success" collapsible="false"
+                         titleStyle="text-align: center">
+
+                    <b:messages id="messages"/>
+
+
+                    <h:inputHidden value="#{aluguelBean.aluguel.id}"/>
+
+                    <h:panelGrid columns="1" cellpadding="5">
+
+                        <b:dateTimePicker value="#{aluguelBean.aluguel.dataInicio}"
+                                          use-current="true"
+                                          show-time="false"
+                                          label="Data inicial"/>
+
+                        <b:dateTimePicker value="#{aluguelBean.aluguel.dataFim}"
+                                          use-current="true"
+                                          show-time="false"
+                                          label="Data final"/>
+                    </h:panelGrid>
+                    <b:buttonGroup style="padding-top: 40px">
+                        <b:commandButton look="danger" value="Cancelar"
+                                         action="/restrito/aluguel/listarAlugueis.xhtml"/>
+                        <b:commandButton look="primary" value="Concluir"
+                                         action="#{aluguelBean.salvar()}">
+                            <f:param name="veiculoId" value="#{aluguelBean.veiculo.id}"/>
+                        </b:commandButton>
+                    </b:buttonGroup>
+                </b:panel>
+            </b:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

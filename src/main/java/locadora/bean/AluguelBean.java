@@ -51,6 +51,7 @@ public class AluguelBean {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+        this.aluguel.setVeiculoId(veiculo);
     }
 
     public SelectItem[] getSelectVeiculo() {
@@ -63,6 +64,9 @@ public class AluguelBean {
     }
 
     public String salvar() {
+        String vId = FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap().get("veiculoId");
+        veiculo = veiculoRN.obter(Integer.parseInt(vId));
         aluguel.setValor(new BigDecimal(calcularValor()));
         aluguel.setUsuario(usuarioBean.getUsuario());
         aluguel.setVeiculoId(veiculo);
@@ -72,7 +76,7 @@ public class AluguelBean {
             FacesContext.getCurrentInstance().addMessage(null, fm);
             this.alugueis = null;
             this.aluguel = new Aluguel();
-            return "/restrito/aluguel/cadastrarAluguel.xhtml";
+            return "/restrito/aluguel/listarAlugueis.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
@@ -85,6 +89,7 @@ public class AluguelBean {
     }
 
     public Integer diasAluguel() {
+        System.out.println("AAA"+aluguel.getDataFim().getTime());
         DateTime dataInicio = new DateTime(aluguel.getDataInicio().getTime());
         DateTime dataFinal = new DateTime(aluguel.getDataFim().getTime());
         Days d = Days.daysBetween(dataInicio, dataFinal);
@@ -94,13 +99,12 @@ public class AluguelBean {
     public String excluir(Aluguel aluguel) {
         aluguelRN.excluir(aluguel);
         alugueis = null;
-        return "/restrito/aluguel/cadastrarAluguel.xhtml?faces-redirect=true";
+        return "/restrito/aluguel/listarAlugueis.xhtml?faces-redirect=true";
     }
 
     public String alterar(Aluguel aluguel) {
-        this.setAluguel(aluguel);
-        alugueis = null;
-        return "/restrito/aluguel/cadastrarAluguel.xhtml?faces-redirect=true";
+        this.aluguel = aluguel;
+        return "/restrito/aluguel/formAluguel.xhtml";
     }
 
     public String cancelar() {

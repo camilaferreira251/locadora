@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:form>
+                <b:commandButton
+                    ajax="false"
+                    icon="ui-icon-document"
+                    value="Cadastrar veículo"
+                    action="/restrito/veiculo/formVeiculo.xhtml"/>
+                <br/>
+                <b:dataTable value="#{veiculoBean.veiculos}"
+                             var="veiculo"
+                             custom-lang-url="../../resources/traducoes/dataTable-ptBR.json">
+                    <b:dataTableColumn value="#{veiculo.placa}"/>
+                    <b:dataTableColumn value="#{veiculo.modelo}" />
+                    <b:dataTableColumn value="#{veiculo.marca}" />
+                    <b:dataTableColumn value="#{veiculo.cor}" />
+                    <b:dataTableColumn value="#{veiculo.ano}" />
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Ar Condicionado</li>
+                            </ul>
+                        </f:facet>
+                        #{veiculo.arCondicionado}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Trava elétrica</li>
+                            </ul>
+                        </f:facet>
+                        #{veiculo.travaEletrica}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Valor da diária</li>
+                            </ul>
+                        </f:facet>
+                        R$ #{veiculo.valorDiaria}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Operações</li>
+                            </ul>
+                        </f:facet>
+                        <b:commandButton
+                            ajax="false"
+                            icon="ui-icon-pencil"
+                            value="Editar"
+                            action="#{veiculoBean.alterar(veiculo)}">
+                            <f:setPropertyActionListener
+                                target="#{veiculoBean.veiculo}"
+                                value="#{veiculo}"/>
+                        </b:commandButton>
+                        <b:commandButton
+                            ajax="false"
+                            icon="ui-icon-pencil"
+                            value="Remover"
+                            action="#{veiculoBean.excluir(veiculo)}">
+                            <f:setPropertyActionListener
+                                target="#{veiculoBean.veiculo}"
+                                value="#{veiculo}"/>
+                        </b:commandButton>
+                    </b:dataTableColumn>
+                </b:dataTable>
+            </b:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

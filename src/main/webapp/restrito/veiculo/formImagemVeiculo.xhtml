@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:panel title="Imagem do veículo" look="success" collapsible="false">
+
+                <b:messages id="messages"/>
+                <b:form id="formImagemVeiculo" inline="true" enctype="multipart/form-data">
+
+                    <h:inputHidden value="#{veiculoBean.veiculo.id}"/>
+
+                    <p:fileUpload fileUploadListener="#{veiculoBean.handleFileUpload}"
+                                  mode="advanced"
+                                  dragDropSupport="true"
+                                  multiple="false"
+                                  update="messages"
+                                  label="Selecione uma imagem"
+                                  uploadLabel="Importar"
+                                  cancelLabel="Cancelar"
+                                  validator="#{veiculoBean.validarImagem}"
+                                  fileLimit="1"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+
+
+                    <b:buttonGroup style="padding-top: 40px">
+                        <!--                        <b:commandButton look="danger" value="Cancelar"
+                                                                 action="/restrito/veiculo/listarVeiculos.xhtml"/>-->
+                        <b:commandButton look="primary" value="Concluir"
+                                         action="#{veiculoBean.salvar()}"/>
+                    </b:buttonGroup>
+                </b:form>
+            </b:panel>
+        </ui:define>
+    </ui:decorate>
+</html>
+

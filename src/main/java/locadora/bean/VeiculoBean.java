@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import locadora.entity.Veiculo;
 import locadora.rn.VeiculoRN;
+import locadora.util.Util;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -37,6 +38,7 @@ public class VeiculoBean {
     private StreamedContent sc;
 
     public VeiculoBean() {
+//        veiculo = (Veiculo) Util.lerDaSessao("veiculo");
     }
 
     public Veiculo getVeiculo() {
@@ -56,7 +58,7 @@ public class VeiculoBean {
     }
 
     public String nextStep() {
-        return "/restrito/aluguel/confirmarAluguel.xhtml";
+        return "/restrito/aluguel/formAluguel.xhtml";
     }
 
     public StreamedContent getImagemVeiculo() {
@@ -87,16 +89,14 @@ public class VeiculoBean {
     }
 
     public String handleFileUpload(FileUploadEvent e) {
-        veiculo = (Veiculo) FacesContext.
-                        getCurrentInstance().getExternalContext().
-                        getSessionMap().get("veiculo");
-
+        veiculo = (Veiculo) Util.lerDaSessao("veiculo");
         veiculo.setImagem(e.getFile().getContents());
 
         if (veiculoRN.salvar(veiculo)) {
             FacesMessage message = new FacesMessage("Importado com sucesso.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
+//            Util.deleteDaSessao("veiculo");
+            return "/restrito/veiculo/listarVeiculos.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao importar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
@@ -109,10 +109,10 @@ public class VeiculoBean {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             this.veiculos = null;
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("veiculo", this.veiculo);
+            Util.colocarNaSessao("veiculo", veiculo);
+//            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("veiculo", this.veiculo);
             this.veiculo = new Veiculo();
-//            return "/restrito/veiculo/cadastrarVeiculo.xhtml";
-            return "/restrito/veiculo/imagemVeiculo.xhtml";
+            return "/restrito/veiculo/formImagemVeiculo.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
@@ -123,17 +123,12 @@ public class VeiculoBean {
     public String excluir(Veiculo veiculo) {
         veiculoRN.excluir(veiculo);
         veiculos = null;
-        return "/restrito/veiculo/cadastrarVeiculo.xhtml?faces-redirect=true";
+        return "/restrito/veiculo/listarVeiculos.xhtml?faces-redirect=true";
     }
 
     public String alterar(Veiculo veiculo) {
-        this.setVeiculo(veiculo);
-        veiculos = null;
-        return "/restrito/veiculo/cadastrarVeiculo.xhtml?faces-redirect=true";
-    }
-
-    public String cancelar() {
-        return "/admin/formatoEmbalagem/lista-formatoembalagem.xhtml";
+        this.veiculo = veiculo;
+        return "/restrito/veiculo/formVeiculo.xhtml";
     }
 
     public List<Veiculo> getVeiculos() {

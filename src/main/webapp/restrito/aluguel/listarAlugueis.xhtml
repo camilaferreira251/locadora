@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:form>
+                <b:commandButton
+                    ajax="false"
+                    icon="ui-icon-document"
+                    value="Novo aluguel"
+                    action="/restrito/aluguel/visualizarVeiculos.xhtml"/>
+                <br/>
+                <b:dataTable value="#{aluguelBean.aluguels}"
+                             var="aluguel"
+                             custom-lang-url="../../resources/traducoes/dataTable-ptBR.json">
+
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Locador</li>
+                            </ul>
+                        </f:facet>
+                        #{aluguel.usuario}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Data Inicial</li>
+                            </ul>
+                        </f:facet>
+                        <h:outputText value="#{aluguel.dataInicio}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Data Final</li>
+                            </ul>
+                        </f:facet>
+                        <h:outputText value="#{aluguel.dataFim}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Valor total</li>
+                            </ul>
+                        </f:facet>
+                        R$ #{aluguel.valor}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Operações</li>
+                            </ul>
+                        </f:facet>
+                        <b:commandButton
+                            ajax="false"
+                            icon="ui-icon-pencil"
+                            value="Editar"
+                            action="#{aluguelBean.alterar(aluguel)}">
+                            <f:setPropertyActionListener
+                                target="#{aluguelBean.aluguel}"
+                                value="#{aluguel}"/>
+                        </b:commandButton>
+                        <b:commandButton
+                            ajax="false"
+                            icon="ui-icon-pencil"
+                            value="Remover"
+                            action="#{aluguelBean.excluir(aluguel)}">
+                            <f:setPropertyActionListener
+                                target="#{aluguelBean.aluguel}"
+                                value="#{aluguel}"/>
+                        </b:commandButton>
+                    </b:dataTableColumn>
+                </b:dataTable>
+            </b:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

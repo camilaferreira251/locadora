@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:panel title="Dados do veículo" look="success" collapsible="false">
+                
+                <b:messages id="messages"/>
+                <b:form id="formVeiculo" inline="true" enctype="multipart/form-data">
+                    
+                    <h:inputHidden value="#{veiculoBean.veiculo.id}"/>
+                    
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <b:inputText label="Placa:" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.placa}">
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText label="Modelo" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.modelo}">
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText label="Marca" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.marca}">
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText label="Cor" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.cor}">
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText label="Ano" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.ano}">
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText label="Valor da diária" labelStyle="width:80px;"
+                                     value="#{veiculoBean.veiculo.valorDiaria}">
+                            <f:facet name="prepend">
+                                <h:outputText value="R$" />
+                            </f:facet>
+                            <f:facet name="append">
+                                <h:outputText value=" " />
+                            </f:facet>
+                        </b:inputText>
+                        <b:switch value="#{veiculoBean.veiculo.arCondicionado}"
+                                  label="Possui ar condicionado?"
+                                  offColor="danger"
+                                  offText="Não"
+                                  onColor="primary"
+                                  onText="Sim"/>
+                        <b:switch value="#{veiculoBean.veiculo.arCondicionado}"
+                                  label="Possui trava elétrica?"
+                                  offColor="danger"
+                                  offText="Não"
+                                  onColor="primary"
+                                  onText="Sim"/>
+                    </h:panelGrid>
+                    <b:buttonGroup style="padding-top: 40px">
+                        <b:commandButton look="danger" value="Cancelar"
+                                         action="/restrito/veiculo/listarVeiculos.xhtml"/>
+                        <b:commandButton look="primary" value="Avançar"
+                                         action="#{veiculoBean.salvar()}"/>
+                    </b:buttonGroup>
+                </b:form>
+            </b:panel>
+        </ui:define>
+    </ui:decorate>
+</html>
+

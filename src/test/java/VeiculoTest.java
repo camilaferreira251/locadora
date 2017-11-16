@@ -7,6 +7,7 @@
 import java.math.BigDecimal;
 import java.util.List;
 import locadora.entity.Aluguel;
+import locadora.entity.Usuario;
 import locadora.entity.Veiculo;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -88,11 +89,23 @@ public class VeiculoTest {
         Veiculo v = new Veiculo();
         v.hashCode();
     }
+    Veiculo v = new Veiculo();
     
     @Test
     public void VeiculoToString(){
-        Veiculo v = new Veiculo();
         v.toString();
+    }
+    
+    @Test
+    public void VeiculoEqualsTest(){
+        assertTrue(v.equals(v));
+    }
+    
+    Usuario u = new Usuario();
+    
+    @Test
+    public void VeiculoEqualsFalseTest(){
+    assertFalse(v.equals(u));
     }
             
     @BeforeClass

@@ -19,14 +19,18 @@ import static org.junit.Assert.*;
  * @author camila
  */
 public class AluguelRNTest {
+    AluguelRN a = new AluguelRN();
+    Aluguel al = new Aluguel();
     
     @Test
     public void AluguelRNTest() {
-    AluguelRN a = new AluguelRN();
-    Aluguel al = new Aluguel();
-       
+         
     Assert.assertTrue(a.salvar(al)); 
-    Assert.assertTrue(a.excluir(al));
+    }
+    
+    @Test
+    public void ExcluirTest(){    
+    Assert.assertFalse(a.excluir(al));
     
     }
     

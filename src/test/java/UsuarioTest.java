@@ -11,6 +11,8 @@ import locadora.entity.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -87,12 +89,23 @@ public class UsuarioTest {
         Usuario u = new Usuario();
         u.hashCode();
     }
-    
+    Usuario u = new Usuario();
     @Test
     public void UsuarioToString(){
-        Usuario u = new Usuario();
         u.toString();
     }
+    
+    @Test
+    public void UsuarioEqualsTest(){
+        assertTrue(u.equals(u));
+    }
+     
+    Aluguel a = new Aluguel();
+    @Test
+    public void UsuarioEqualsFalseTest(){
+    assertFalse(u.equals(a));
+    }
+    
      
     }
 

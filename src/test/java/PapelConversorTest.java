@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 
-import java.util.List;
-import locadora.entity.Veiculo;
-import locadora.rn.VeiculoRN;
+import locadora.conversores.PapelConversor;
+import locadora.rn.PapelRN;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,18 +17,12 @@ import static org.junit.Assert.*;
  *
  * @author camila
  */
-public class VeiculoRNTest {
+public class PapelConversorTest {
     
-    Veiculo veiculo;
-     
     @Test
-    public void VeiculoRNTest() {
-        VeiculoRN v = new VeiculoRN();
-        Veiculo vei = new Veiculo();
-        
-        Assert.assertTrue(v.salvar(vei));
-        Assert.assertFalse(v.excluir(vei));
-                
+    public void PapelConversorTest() {
+    PapelConversor pc = new PapelConversor();
+    PapelRN prn = new PapelRN();
     }
     
     @BeforeClass

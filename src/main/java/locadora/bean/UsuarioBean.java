@@ -43,16 +43,16 @@ public class UsuarioBean {
     public UsuarioBean() {
     }
 
-    public String getBomDia() {
-        DateFormat df = new SimpleDateFormat("HH");
-        if (Integer.parseInt(df.format(new Date())) >= 12 && Integer.parseInt(df.format(new Date())) <= 18) {
-            return "Boa tarde! ";
-        }
-        if (Integer.parseInt(df.format(new Date())) >= 18 && Integer.parseInt(df.format(new Date())) <= 23) {
-            return "Boa noite! ";
-        }
-        return "Bom dia! ";
-    }
+    //public String getBomDia() {
+      //  DateFormat df = new SimpleDateFormat("HH");
+        //if (Integer.parseInt(df.format(new Date())) >= 12 && Integer.parseInt(df.format(new Date())) <= 18) {
+        //    return "Boa tarde! ";
+        //}
+        //if (Integer.parseInt(df.format(new Date())) >= 18 && Integer.parseInt(df.format(new Date())) <= 23) {
+          //  return "Boa noite! ";
+        //}
+        //return "Bom dia! ";
+   // }
 
     public boolean isAdministrador() {
         return rn.papel(ADMIN, getUsuario());

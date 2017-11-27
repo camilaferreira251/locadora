@@ -22,15 +22,17 @@ import static org.junit.Assert.*;
 public class VeiculoRNTest {
     
     Veiculo veiculo;
-     
+    
+    VeiculoRN v = new VeiculoRN();
+    Veiculo vei = new Veiculo();
+    Integer id;
+    
     @Test
     public void VeiculoRNTest() {
-        VeiculoRN v = new VeiculoRN();
-        Veiculo vei = new Veiculo();
-        
-        Assert.assertTrue(v.salvar(vei));
-        Assert.assertFalse(v.excluir(vei));
-                
+    v.salvar(vei);
+    v.excluir(vei);
+    v.obterTodos();
+    v.obter(id);
     }
     
     @BeforeClass

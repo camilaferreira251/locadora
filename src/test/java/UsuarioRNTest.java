@@ -21,18 +21,29 @@ import static org.junit.Assert.*;
  * @author camila
  */
 public class UsuarioRNTest {
+    UsuarioRN u = new UsuarioRN();
+    Usuario us = new Usuario();
+    String id;
+    String login;
+    String papel;
+    List <Papel> selecionados;
     
     @Test
     public void UsuarioRNTest() {
-    UsuarioRN u = new UsuarioRN();
-    Usuario us = new Usuario();
-       
     Assert.assertTrue(u.salvar(us)); 
     Assert.assertFalse(u.excluir(us));
     
- 
+    u.obter(id);
+    u.obterSelecionados(us);
+    u.atualizarPapeis(us);
     }
     
+    @Test
+    public void UsuarioPapelTest(){
+    assertFalse(u.papel(papel, us));
+    }
+    
+        
     @BeforeClass
     public static void setUpClass() {
     }

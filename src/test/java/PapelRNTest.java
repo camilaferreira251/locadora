@@ -19,16 +19,23 @@ import static org.junit.Assert.*;
  * @author camila
  */
 public class PapelRNTest {
-    
+    PapelRN pr = new PapelRN();
     @Test
     public void  PapelRNTest() {
-    PapelRN pr = new PapelRN();
+    
     Papel p = new Papel();
        
     Assert.assertTrue(pr.salvar(p)); 
     Assert.assertTrue(pr.excluir(p));
-    
+        
     }
+    Integer id;
+    
+    @Test
+    public void ObterPapelTest(){
+    pr.obter(id);
+    }
+    
     
     @BeforeClass
     public static void setUpClass() {

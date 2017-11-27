@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import java.util.List;
 import locadora.entity.Aluguel;
+import locadora.entity.Usuario;
 import locadora.rn.AluguelRN;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,17 +23,25 @@ import static org.junit.Assert.*;
 public class AluguelRNTest {
     AluguelRN a = new AluguelRN();
     Aluguel al = new Aluguel();
+    List<Aluguel> alugueis;
+    Usuario u = new Usuario();
+    String id;
     
     @Test
     public void AluguelRNTest() {
-         
     Assert.assertTrue(a.salvar(al)); 
     }
     
     @Test
     public void ExcluirTest(){    
     Assert.assertFalse(a.excluir(al));
+    }
     
+    
+    @Test
+    public void ListAluguelTest(){
+    a.obterTodos();
+    a.obter(id);
     }
     
     @BeforeClass

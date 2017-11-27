@@ -33,6 +33,7 @@ public class VeiculoTest {
     Boolean travaEletrica = true;
     List<Aluguel> aluguelList;
     int hash = 1;
+    byte[]  imagem;
     
  
 
@@ -106,6 +107,13 @@ public class VeiculoTest {
     @Test
     public void VeiculoEqualsFalseTest(){
     assertFalse(v.equals(u));
+    assertFalse(v.equals(id));
+    }
+    
+    @Test
+    public void VeiculoImagemTest(){
+    v.getImagem();
+    v.setImagem(imagem);
     }
             
     @BeforeClass

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.util.List;
 import locadora.bean.AluguelBean;
 import locadora.bean.UsuarioBean;
 import locadora.entity.Aluguel;
@@ -29,13 +30,16 @@ public class AluguelBeanTest {
     UsuarioBean ub = new UsuarioBean();
     Aluguel a = new Aluguel();
     Veiculo v = new Veiculo();
+    List<Aluguel> alugueis;
     
     @Test
     public void AluguelBeanTest() {
     assertEquals(a, ab.getAluguel());
     ab.setAluguel(a);
+    ab.getSelectVeiculo();
     }
     
+        
     @Test
     public void AluguelVeiculoTest(){
     assertEquals(v, ab.getVeiculo());
@@ -44,10 +48,20 @@ public class AluguelBeanTest {
     
     @Test
     public void ExcluirAluguelTest(){
-    assertEquals("/restrito/aluguel/cadastrarAluguel.xhtml?faces-redirect=true", ab.excluir(a));
+    assertEquals("/restrito/aluguel/listarAlugueis.xhtml?faces-redirect=true", ab.excluir(a));
     }
     
+    @Test
+    public void AlterarAluguelTest(){
+    assertEquals("/restrito/aluguel/formAluguel.xhtml", ab.alterar(a));
+    }
     
+    @Test
+    public void CancelarAluguelTest(){
+    assertEquals("/admin/formatoEmbalagem/lista-formatoembalagem.xhtml", ab.cancelar());
+    }
+    
+       
     @BeforeClass
     public static void setUpClass() {
     }

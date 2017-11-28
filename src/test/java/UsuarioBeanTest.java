@@ -30,6 +30,7 @@ public class UsuarioBeanTest {
     List<Usuario> usuarios;
     List<Papel> papeis;
     Map<String, Papel> mappapeis;
+    String login = "camila";
     
     @Test
     public void UsuarioAministratorTest(){
@@ -37,7 +38,12 @@ public class UsuarioBeanTest {
     ub.isUser();
     }
     
-     
+    @Test
+    public void UsuarioByLoginTest(){
+    ub.getUsuarioByLogin(login);
+    }
+    
+       
     @Test
     public void UsuarioBeanAlterarTest() {
     assertEquals("/admin/usuario/usuario.xhtml", ub.alterar());
@@ -58,7 +64,7 @@ public class UsuarioBeanTest {
     assertEquals("/admin/usuario/remover-usuario.xhtml", ub.irExcluir());
     }
     
-    String login;
+ 
     
     @Test
     public void UsuarioBeanGetUsuarioTest(){

@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 
-import java.util.List;
-import locadora.entity.Papel;
-import locadora.entity.Usuario;
-import locadora.rn.UsuarioRN;
+import locadora.dao.AluguelDAO;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,30 +16,16 @@ import static org.junit.Assert.*;
  *
  * @author camila
  */
-public class UsuarioRNTest {
-    UsuarioRN u = new UsuarioRN();
-    Usuario us = new Usuario();
-    String id;
+public class AluguelDAOTest {
+    
+    AluguelDAO a = new AluguelDAO();
     String login = "camila";
-    String papel = "adm";
-    List <Papel> selecionados;
     
     @Test
-    public void UsuarioRNTest() {
-    Assert.assertTrue(u.salvar(us)); 
-    Assert.assertFalse(u.excluir(us));
+    public void AluguelDAOTest(){
     
-    u.obter(id);
-    u.obterSelecionados(us);
-    u.atualizarPapeis(us);
     }
     
-    @Test
-    public void UsuarioPapelTest(){
-    assertFalse(u.papel(papel, us));
-    }
-    
-            
     @BeforeClass
     public static void setUpClass() {
     }

@@ -5,12 +5,14 @@
  */
 
 import locadora.dao.GenericDAO;
+import locadora.entity.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
 
 /**
  *
@@ -19,12 +21,22 @@ import static org.junit.Assert.*;
 public class GenericDAOTest {
     
     GenericDAO g = new GenericDAO();
+    Usuario u = new Usuario();
     
     @Test
-    public void GenericDAOTest(){
+    public void GenericDAOTest() throws Exception {
     assertTrue(g.iniciarTransacao());
+    assertTrue(g.alterar(u));
+    
+    try {
+    g.iniciarTransacao();
+  } catch (Exception e) {
+    assertTrue(e instanceof NullPointerException);
+  }
     }
     
+     
+     
     @BeforeClass
     public static void setUpClass() {
     }

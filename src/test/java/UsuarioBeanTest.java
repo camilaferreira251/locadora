@@ -43,7 +43,7 @@ public class UsuarioBeanTest {
     ub.getUsuarioByLogin(login);
     }
     
-       
+          
     @Test
     public void UsuarioBeanAlterarTest() {
     assertEquals("/admin/usuario/usuario.xhtml", ub.alterar());

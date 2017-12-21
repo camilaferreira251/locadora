@@ -15,8 +15,12 @@
               brandHref="#" inverse="true"
               fixed="top">
         <b:container>
-            <h:form id="ftop" rendered="${usuarioBean.user or usuarioBean.administrador}">
-                <b:navBar brand="Locadora" inverse="true" fixed="top">
+            <b:navBar brand="Locadora" inverse="true" fixed="top">
+                <b:navbarLinks>
+                    <b:navLink value="Inicio"
+                               href="/locadora/publico/home.xhtml"></b:navLink>
+                </b:navbarLinks>
+                <h:form id="ftop" rendered="${usuarioBean.user or usuarioBean.administrador}">
                     <b:navbarLinks>
                         <b:dropMenu value="Veículos"
                                     rendered="${usuarioBean.administrador}">
@@ -24,6 +28,8 @@
                                        href="/locadora/restrito/veiculo/formVeiculo.xhtml"></b:navLink>
                             <b:navLink value="Veículos cadastrados"
                                        href="/locadora/restrito/veiculo/listarVeiculos.xhtml"></b:navLink>
+                            <b:navLink value="Veículos mais alugados"
+                                       href="/locadora/restrito/veiculo/listarMaisAlugados.xhtml"></b:navLink>
                         </b:dropMenu>
                         <b:dropMenu value="Alugueis">
                             <b:navLink value="Realizar novo"
@@ -38,8 +44,17 @@
                                    icon="glyphicon glyphicon-log-out">
                         </b:navLink>
                     </b:navbarLinks>
-                </b:navBar>
-            </h:form>
+                </h:form>
+                <h:form rendered="#{request.remoteUser == null}">
+                    <b:navbarLinks pull="right">
+                        <b:navLink value="Entrar"
+                                   href="/locadora/publico/login.xhtml"
+                                   icon="glyphicon glyphicon-log-in">
+                        </b:navLink>
+                    </b:navbarLinks>
+                </h:form>
+            </b:navBar>
+
         </b:container>
     </b:navBar>
 

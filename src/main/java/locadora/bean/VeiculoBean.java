@@ -14,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import locadora.entity.Aluguel;
 import locadora.entity.Veiculo;
 import locadora.rn.VeiculoRN;
 import locadora.util.Util;
@@ -32,6 +33,7 @@ public class VeiculoBean {
 
     private final VeiculoRN veiculoRN = new VeiculoRN();
     private Veiculo veiculo = new Veiculo();
+    private Aluguel aluguel = new Aluguel();
     private List<Veiculo> veiculos;
     private UploadedFile arquivo;
     private static final int MAX_SIZE = 2 * 1024 * 1024;
@@ -49,6 +51,14 @@ public class VeiculoBean {
         this.veiculo = veiculo;
     }
 
+    public Aluguel getAluguel() {
+        return aluguel;
+    }
+
+    public void setAluguel(Aluguel aluguel) {
+        this.aluguel = aluguel;
+    }
+
     public UploadedFile getArquivo() {
         return arquivo;
     }
@@ -58,7 +68,11 @@ public class VeiculoBean {
     }
 
     public String nextStep() {
-        return "/restrito/aluguel/formAluguel.xhtml";
+        if (new UsuarioBean().getUsuario() != null) {
+            return "/restrito/aluguel/formAluguel.xhtml";
+        } else {
+            return "/publico/login.xhtml";
+        }
     }
 
     public StreamedContent getImagemVeiculo() {
@@ -120,6 +134,31 @@ public class VeiculoBean {
         }
     }
 
+    public String buscarVeiculos() {
+        if (aluguel.getDataFim().before(aluguel.getDataInicio())) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data fim inválida!", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return null;
+        }
+        return "/publico/resultadosBusca.xhtml";
+    }
+
+    public String salvarImagem() {
+        if (veiculoRN.salvar(veiculo)) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            this.veiculos = null;
+            Util.colocarNaSessao("veiculo", veiculo);
+//            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("veiculo", this.veiculo);
+            this.veiculo = new Veiculo();
+            return "/restrito/veiculo/listarVeiculos.xhtml";
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            return null;
+        }
+    }
+
     public String excluir(Veiculo veiculo) {
         veiculoRN.excluir(veiculo);
         veiculos = null;
@@ -134,6 +173,20 @@ public class VeiculoBean {
     public List<Veiculo> getVeiculos() {
         if (veiculos == null) {
             veiculos = veiculoRN.obterTodos();
+        }
+        return veiculos;
+    }
+
+    public List<Veiculo> getVeiculosMaisAlugados() {
+        if (veiculos == null) {
+            veiculos = veiculoRN.obterMaisAlugados();
+        }
+        return veiculos;
+    }
+
+    public List<Veiculo> getVeiculosBusca() {
+        if (veiculos == null) {
+            veiculos = veiculoRN.obterPorBusca(aluguel);
         }
         return veiculos;
     }

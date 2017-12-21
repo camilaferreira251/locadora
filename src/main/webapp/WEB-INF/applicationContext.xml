@@ -10,35 +10,18 @@
  
     <http auto-config="true">
         <form-login login-page="/publico/login.xhtml"
-                    default-target-url = "/restrito/home.xhtml"
+                    default-target-url = "/publico/home.xhtml"
                     authentication-failure-url="/publico/login.xhtml?error=true" />
-        <logout logout-success-url="/publico/login.xhtml" />
+        <logout logout-success-url="/publico/home.xhtml" />
  
-        <intercept-url pattern="/restrito/home.xhtml"
+        <intercept-url pattern="/restrito/aluguel/*"
                        access="ROLE_USER" />
         <intercept-url pattern="/restrito/*" 
                        access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/veiculo/*" 
+                       access="ROLE_ADMIN" />
     </http>
  
-<!--    <authentication-manager>
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource"
-              users-by-username-query=
-                "select username, password, enabled from user where username=?"
-              authorities-by-username-query=
-                "select username, role from user_role where username =?  " />
-        </authentication-provider>
-    </authentication-manager>-->
- 
-<!--    <b:bean id="dataSource"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <b:property name="url"
-            value="jdbc:mysql://localhost:3306/locadora" />
-        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <b:property name="username" value="root" />
-        <b:property name="password" value="" />
-    </b:bean>-->
-    
     <authentication-manager>
         <authentication-provider user-service-ref="myUserDetailsService"/>
     </authentication-manager>

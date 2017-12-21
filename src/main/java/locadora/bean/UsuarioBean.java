@@ -4,9 +4,6 @@
  */
 package locadora.bean;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import locadora.entity.Papel;
 import locadora.entity.Usuario;
+import locadora.rn.PapelRN;
 import locadora.rn.UsuarioRN;
 
 /**
@@ -28,6 +26,7 @@ import locadora.rn.UsuarioRN;
 @ManagedBean
 @RequestScoped
 public class UsuarioBean {
+
     private static final Logger LOG = Logger.getLogger(UsuarioBean.class.getName());
 
     private final String ADMIN = "ROLE_ADMIN";
@@ -39,20 +38,8 @@ public class UsuarioBean {
     private Map<String, Papel> papeis;
     private List<Papel> selecionados;
 
-    /** Creates a new instance of embalagemBean */
     public UsuarioBean() {
     }
-
-    //public String getBomDia() {
-      //  DateFormat df = new SimpleDateFormat("HH");
-        //if (Integer.parseInt(df.format(new Date())) >= 12 && Integer.parseInt(df.format(new Date())) <= 18) {
-        //    return "Boa tarde! ";
-        //}
-        //if (Integer.parseInt(df.format(new Date())) >= 18 && Integer.parseInt(df.format(new Date())) <= 23) {
-          //  return "Boa noite! ";
-        //}
-        //return "Bom dia! ";
-   // }
 
     public boolean isAdministrador() {
         return rn.papel(ADMIN, getUsuario());
@@ -72,10 +59,10 @@ public class UsuarioBean {
         }
         return usuario;
     }
-    
+
     public Usuario getUsuarioByLogin(String login) {
         return rn.obterPorLogin(login);
-    } 
+    }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
@@ -90,10 +77,12 @@ public class UsuarioBean {
             rn.atualizarPapeis(novoUsuario);
         } catch (Exception e) {
         }
+        selecionados = new ArrayList<Papel>();
+        selecionados.add(new PapelRN().obter(2));
         novoUsuario.setPapelList(selecionados);
         rn.salvar(novoUsuario);
         rn.salvarPapeis(selecionados, novoUsuario);
-        return "/restrito/home.xhtml";
+        return "/publico/login.xhtml";
     }
 
     public String alterar() {

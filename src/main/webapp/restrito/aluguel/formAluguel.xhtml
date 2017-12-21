@@ -11,7 +11,6 @@
         <ui:define name="conteudo">
             <b:form id="formAluguel" inline="true">
                 <b:panel title="Dados do veículo" titleStyle="text-align: center" look="success">
-                    <f:param name="veiculoId" value="#{aluguelBean.veiculo.id}"/>
                     
                     <center>
                         <p:graphicImage value="#{veiculoBean.imagemVeiculo}"
@@ -61,22 +60,26 @@
 
                     <h:panelGrid columns="1" cellpadding="5">
 
-                        <b:dateTimePicker value="#{aluguelBean.aluguel.dataInicio}"
+                        <b:dateTimePicker id="dateFrmAlugInic"
+                                          value="#{aluguelBean.aluguel.dataInicio}"
                                           use-current="true"
                                           show-time="false"
                                           label="Data inicial"/>
 
-                        <b:dateTimePicker value="#{aluguelBean.aluguel.dataFim}"
+                        <b:dateTimePicker id="dateFrmAlugFim"
+                                          value="#{aluguelBean.aluguel.dataFim}"
                                           use-current="true"
                                           show-time="false"
                                           label="Data final"/>
                     </h:panelGrid>
                     <b:buttonGroup style="padding-top: 40px">
-                        <b:commandButton look="danger" value="Cancelar"
+                        <b:commandButton id="btnFrmAlugCanc"
+                                         look="danger" value="Cancelar"
                                          action="/restrito/aluguel/listarAlugueis.xhtml"/>
-                        <b:commandButton look="primary" value="Concluir"
+                        <b:commandButton id="btnFrmAlugSalvar"
+                                         look="primary" value="Concluir"
                                          action="#{aluguelBean.salvar()}">
-                            <f:param name="veiculoId" value="#{aluguelBean.veiculo.id}"/>
+                            <f:param name="veiculoId" value="#{aluguelBean.aluguel.veiculoId.id}"/>
                         </b:commandButton>
                     </b:buttonGroup>
                 </b:panel>

@@ -6,7 +6,8 @@
 package locadora.rn;
 
 import java.util.List;
-import locadora.dao.GenericDAO;
+import locadora.dao.VeiculoDAO;
+import locadora.entity.Aluguel;
 import locadora.entity.Veiculo;
 
 /**
@@ -14,7 +15,8 @@ import locadora.entity.Veiculo;
  * @author jhonatan
  */
 public class VeiculoRN {
-    private final GenericDAO<Veiculo> dao = new GenericDAO<Veiculo>();
+
+    private final VeiculoDAO dao = new VeiculoDAO();
 
     public VeiculoRN() {
     }
@@ -36,6 +38,14 @@ public class VeiculoRN {
 
     public List<Veiculo> obterTodos() {
         return dao.obterTodos(Veiculo.class);
+    }
+
+    public List<Veiculo> obterMaisAlugados() {
+        return dao.obterVeiculosMaisAlugados();
+    }
+
+    public List<Veiculo> obterPorBusca(Aluguel a) {
+        return dao.obterVeiculosBusca(a);
     }
 
     public Veiculo obter(Integer id) {

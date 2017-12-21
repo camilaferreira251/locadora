@@ -4,8 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="/publico/template/template.xhtml">
         <ui:define name="conteudo">
             <b:form>
@@ -13,7 +12,8 @@
                     ajax="false"
                     icon="ui-icon-document"
                     value="Novo aluguel"
-                    action="/restrito/aluguel/visualizarVeiculos.xhtml"/>
+                    action="/restrito/aluguel/visualizarVeiculos.xhtml"
+                    look="info"/>
                 <br/>
                 <b:dataTable value="#{aluguelBean.aluguels}"
                              var="aluguel"
@@ -22,7 +22,15 @@
                     <b:dataTableColumn>
                         <f:facet name="header">
                             <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
-                                <li>Locador</li>
+                                <li>Veículo</li>
+                            </ul>
+                        </f:facet>
+                        #{aluguel.veiculoId.placa}
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+                                <li>Locatário</li>
                             </ul>
                         </f:facet>
                         #{aluguel.usuario}

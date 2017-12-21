@@ -6,6 +6,9 @@
 package locadora.bean;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +19,7 @@ import locadora.entity.Aluguel;
 import locadora.entity.Veiculo;
 import locadora.rn.AluguelRN;
 import locadora.rn.VeiculoRN;
+import locadora.util.Util;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -35,6 +39,7 @@ public class AluguelBean {
     private List<Aluguel> alugueis;
 
     public AluguelBean() {
+        
     }
 
     public Aluguel getAluguel() {
@@ -71,25 +76,45 @@ public class AluguelBean {
         aluguel.setUsuario(usuarioBean.getUsuario());
         aluguel.setVeiculoId(veiculo);
 
+        if (aluguel.getDataFim().before(aluguel.getDataInicio())){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data fim inválida!", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            Util.colocarNaSessao("aluguel", aluguel);
+            return null;
+        }
+    
+        if(aluguel.getDataInicio().before(new Date())) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data de início inválida!", "");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+            Util.colocarNaSessao("aluguel", aluguel);
+            return null;
+            
+        }
         if (aluguelRN.salvar(aluguel)) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
             this.alugueis = null;
             this.aluguel = new Aluguel();
+            Util.deleteDaSessao("aluguel");
             return "/restrito/aluguel/listarAlugueis.xhtml";
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao salvar", "");
             FacesContext.getCurrentInstance().addMessage(null, fm);
+            Util.colocarNaSessao("aluguel", aluguel);
             return null;
         }
+
     }
 
-    public Float calcularValor() {
+    public float calcularValor() {
+        if(diasAluguel()==0){
+        return new Float(veiculo.getValorDiaria().toString());
+        }
         return veiculo.getValorDiaria().floatValue() * diasAluguel();
     }
 
     public Integer diasAluguel() {
-        System.out.println("AAA"+aluguel.getDataFim().getTime());
+        System.out.println("AAA" + aluguel.getDataFim().getTime());
         DateTime dataInicio = new DateTime(aluguel.getDataInicio().getTime());
         DateTime dataFinal = new DateTime(aluguel.getDataFim().getTime());
         Days d = Days.daysBetween(dataInicio, dataFinal);

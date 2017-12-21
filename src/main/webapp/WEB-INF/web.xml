@@ -13,6 +13,10 @@
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>resources.application</param-value>
     </context-param>
+    <context-param>
+        <param-name>BootsFaces_THEME</param-name>
+        <param-value>#{theme.internalTheme}</param-value>
+    </context-param>
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -45,6 +49,6 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>publico/login.xhtml</welcome-file>
+        <welcome-file>publico/home.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

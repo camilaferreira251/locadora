@@ -8,44 +8,50 @@
     <ui:decorate template="/publico/template/template.xhtml">
         <ui:define name="conteudo">
             <b:panel title="Dados do veículo" look="success" collapsible="false">
-                
+
                 <b:messages id="messages"/>
                 <b:form id="formVeiculo" inline="true" enctype="multipart/form-data">
-                    
+
                     <h:inputHidden value="#{veiculoBean.veiculo.id}"/>
-                    
+
                     <h:panelGrid columns="1" cellpadding="5">
-                        <b:inputText label="Placa:" labelStyle="width:80px;"
+                        <b:inputText name="placa"
+                                     label="Placa:" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.placa}">
                             <f:facet name="append">
                                 <h:outputText value=" " />
                             </f:facet>
                         </b:inputText>
-                        <b:inputText label="Modelo" labelStyle="width:80px;"
+                        <b:inputText name="modelo"
+                                     label="Modelo" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.modelo}">
                             <f:facet name="append">
                                 <h:outputText value=" " />
                             </f:facet>
                         </b:inputText>
-                        <b:inputText label="Marca" labelStyle="width:80px;"
+                        <b:inputText name="marca"
+                                     label="Marca" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.marca}">
                             <f:facet name="append">
                                 <h:outputText value=" " />
                             </f:facet>
                         </b:inputText>
-                        <b:inputText label="Cor" labelStyle="width:80px;"
+                        <b:inputText name="cor"
+                                     label="Cor" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.cor}">
                             <f:facet name="append">
                                 <h:outputText value=" " />
                             </f:facet>
                         </b:inputText>
-                        <b:inputText label="Ano" labelStyle="width:80px;"
+                        <b:inputText name="ano"
+                                     label="Ano" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.ano}">
                             <f:facet name="append">
                                 <h:outputText value=" " />
                             </f:facet>
                         </b:inputText>
-                        <b:inputText label="Valor da diária" labelStyle="width:80px;"
+                        <b:inputText name="valorDiaria"
+                                     label="Valor da diária" labelStyle="width:80px;"
                                      value="#{veiculoBean.veiculo.valorDiaria}">
                             <f:facet name="prepend">
                                 <h:outputText value="R$" />
@@ -60,7 +66,7 @@
                                   offText="Não"
                                   onColor="primary"
                                   onText="Sim"/>
-                        <b:switch value="#{veiculoBean.veiculo.arCondicionado}"
+                        <b:switch value="#{veiculoBean.veiculo.travaEletrica}"
                                   label="Possui trava elétrica?"
                                   offColor="danger"
                                   offText="Não"
@@ -68,9 +74,9 @@
                                   onText="Sim"/>
                     </h:panelGrid>
                     <b:buttonGroup style="padding-top: 40px">
-                        <b:commandButton look="danger" value="Cancelar"
+                        <b:commandButton id="btnFrmVeicCanc" look="danger" value="Cancelar"
                                          action="/restrito/veiculo/listarVeiculos.xhtml"/>
-                        <b:commandButton look="primary" value="Avançar"
+                        <b:commandButton id="btnFrmVeicSalvar" look="primary" value="Avançar"
                                          action="#{veiculoBean.salvar()}"/>
                     </b:buttonGroup>
                 </b:form>

@@ -7,14 +7,7 @@
     <ui:decorate template="/publico/template/template.xhtml">
         <ui:define name="conteudo">
             <b:form>
-                <b:commandButton
-                    ajax="false"
-                    icon="ui-icon-document"
-                    value="Cadastrar veículo"
-                    action="/restrito/veiculo/formVeiculo.xhtml"
-                    look="info"/>
-                <br/>
-                <b:dataTable value="#{veiculoBean.veiculos}"
+                <b:dataTable value="#{veiculoBean.veiculosMaisAlugados}"
                              var="veiculo"
                              custom-lang-url="../../resources/traducoes/dataTable-ptBR.json">
                     <b:dataTableColumn value="#{veiculo.placa}"/>
@@ -45,31 +38,6 @@
                             </ul>
                         </f:facet>
                         R$ #{veiculo.valorDiaria}
-                    </b:dataTableColumn>
-                    <b:dataTableColumn>
-                        <f:facet name="header">
-                            <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
-                                <li>Operações</li>
-                            </ul>
-                        </f:facet>
-                        <b:commandButton
-                            ajax="false"
-                            icon="ui-icon-pencil"
-                            value="Editar"
-                            action="#{veiculoBean.alterar(veiculo)}">
-                            <f:setPropertyActionListener
-                                target="#{veiculoBean.veiculo}"
-                                value="#{veiculo}"/>
-                        </b:commandButton>
-                        <b:commandButton
-                            ajax="false"
-                            icon="ui-icon-pencil"
-                            value="Remover"
-                            action="#{veiculoBean.excluir(veiculo)}">
-                            <f:setPropertyActionListener
-                                target="#{veiculoBean.veiculo}"
-                                value="#{veiculo}"/>
-                        </b:commandButton>
                     </b:dataTableColumn>
                 </b:dataTable>
             </b:form>

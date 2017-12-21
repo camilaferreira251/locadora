@@ -221,5 +221,5 @@ public class Veiculo implements Serializable {
     public String toString() {
         return "locadora.entity.Veiculo[ id=" + id + " ]";
     }
-    
+
 }

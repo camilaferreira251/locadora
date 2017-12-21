@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <style>
+            body{
+                background-image: url("#{resource['imagens/index-background.jpg']}");
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                background-repeat: no-repeat; 
+                background-attachment:fixed;            
+            }
+        </style>
+    </h:head>
+
+
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <h:body>
+                <h:form>
+                    <b:messages/>
+                    <h:inputHidden 
+                        value="#{veiculoBean.aluguel.id}" />
+                    <center>
+                        <b:panel title="Faça sua reserva" look="primary"
+                                 collapsible="false"
+                                 style="max-width: 500px">
+
+                            <b:dateTimePicker id="homeDataInic"
+                                value="#{veiculoBean.aluguel.dataInicio}"
+                                              allow-input-toggle="true"
+                                              use-current="true"
+                                              show-time="false"
+                                              min-date="moment()"
+                                              label="Quando você deseja?"/>
+
+                            <b:dateTimePicker id="homeDataFinal"
+                                value="#{veiculoBean.aluguel.dataFim}"
+                                              allow-input-toggle="true"
+                                              use-current="true"
+                                              show-time="false"
+                                              label="Até quando?"
+                                              min-date="moment()"/>
+
+                            <b:commandButton look="danger" value="Buscar"
+                                             action="#{veiculoBean.buscarVeiculos}"/>
+                        </b:panel>
+                    </center>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:decorate>
+</html>
+

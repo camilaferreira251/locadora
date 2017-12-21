@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="/publico/template/template.xhtml">
+        <ui:define name="conteudo">
+            <b:form>
+                <ui:repeat value="#{veiculoBean.veiculosBusca}" var="veiculo">
+                    <b:panel title="#{veiculo.placa}"
+                             collapsible="false">
+                        <b:thumbnail tooltip="Clique no botão azul para prosseguir" >
+                            <p:graphicImage value="#{veiculoBean.imagemVeiculo}">
+                                <f:param name="veiculoParam" value="#{veiculo.id}"/>
+                            </p:graphicImage>
+                            <f:facet name="caption">
+                                <center>
+                                    <h:panelGrid columns="2">
+                                        <h:outputText value="Marca: " />
+                                        <h:outputText value="#{veiculo.marca}" />
+
+                                        <h:outputText value="Modelo:" />
+                                        <h:outputText value="#{veiculo.modelo}" />
+
+                                        <h:outputText value="Ano: " />
+                                        <h:outputText value="#{veiculo.ano}" />
+
+                                        <h:outputText value="Cor: " />
+                                        <h:outputText value="#{veiculo.cor}" style="color:#{veiculo.cor}"/>
+
+                                        <h:outputText value="Valor da diária: " />
+                                        <h:outputText value="R$ #{veiculo.valorDiaria}" />
+                                    </h:panelGrid>
+                                    <p>
+                                        <b:commandButton class="btnVisVeicAlug"
+                                                         look="primary"
+                                                         icon="glyphicon glyphicon-shopping-cart"
+                                                         action="#{veiculoBean.nextStep}"
+                                                         largeScreen="full-width">
+                                            <f:setPropertyActionListener value="#{veiculo}"
+                                                                         target="#{aluguelBean.veiculo}"/>
+                                        </b:commandButton>
+                                    </p>
+                                </center>
+
+                            </f:facet>
+                        </b:thumbnail>
+                    </b:panel>
+                </ui:repeat>
+            </b:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

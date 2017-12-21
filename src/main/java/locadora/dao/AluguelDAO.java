@@ -16,9 +16,9 @@ import locadora.entity.Aluguel;
 public class AluguelDAO extends GenericDAO<Aluguel>{
     
     public List<Aluguel> obterTodosByUser(String login) {
-        String squery = "SELECT a FROM Aluguel a WHERE a.usuario = :usuario";
+        String squery = "SELECT * FROM Aluguel a WHERE usuario = ?";
         Query query = getEntityManager().createNativeQuery(squery, Aluguel.class)
-                .setParameter("usuario", login);
+                .setParameter(1, login);
         return query.getResultList();
     }
 }

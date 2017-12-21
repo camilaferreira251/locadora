@@ -26,7 +26,7 @@ public class UsuarioRNTest {
     String id;
     String login = "camila";
     String papel = "adm";
-    List <Papel> selecionados;
+    List<Papel> papeis;
     
     @Test
     public void UsuarioRNTest() {
@@ -42,8 +42,7 @@ public class UsuarioRNTest {
     public void UsuarioPapelTest(){
     assertFalse(u.papel(papel, us));
     }
-    
-            
+                
     @BeforeClass
     public static void setUpClass() {
     }
